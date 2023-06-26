@@ -1,2 +1,3 @@
-# global-config
-Global Configuration for multiple clusters
+# Global Configuration
+
+This directory contains the global configuration for Kubernetes clusters.
