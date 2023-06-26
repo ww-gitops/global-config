@@ -12,7 +12,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: flux-system
+    name: global-config
   postBuild:
     substituteFrom:
       - kind: ConfigMap
@@ -57,4 +57,4 @@ spec:
   postBuild:
     substituteFrom:
       - kind: ConfigMap
-        name: cluster-config
+        name: flux-system
