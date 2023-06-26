@@ -61,17 +61,17 @@ bucket_name=${prefixName}-${awsAccountId}-${awsRegion}-tf-state
 
 for template in $templates
 do
-  if [ ! -d terraform/cluster-templates/$template ]; then
+  if [ ! -d ${config_dir}/terraform/cluster-templates/$template ]; then
     echo "Template $template does not exist" >&2
     exit 1
   fi
 
-  cat terraform/cluster-templates/$template/config-tf.template | envsubst > /tmp/config.tfvars
+  cat ${config_dir}/terraform/cluster-templates/$template/config-tf.template | envsubst > /tmp/config.tfvars
   echo "" >> /tmp/config.tfvars
 
   echo "terraform init..."
   set +e
-  terraform -chdir=terraform/cluster-templates/$template init  -backend-config="bucket=$bucket_name" -backend-config="dynamodb_table=$bucket_name" \
+  terraform -chdir=${config_dir}/terraform/cluster-templates/$template init  -backend-config="bucket=$bucket_name" -backend-config="dynamodb_table=$bucket_name" \
           -backend-config="region=$awsRegion" -backend-config="key=${mgmtClusterName}/${template}/terraform.tfstate" $lock 2>/tmp/state-$$ 1>&2
   result=$?
   set -e
@@ -81,7 +81,7 @@ do
     result=$?
     set -e
     if [ $result -eq 0 ]; then
-      terraform -chdir=terraform/cluster-templates/$template init -backend-config="bucket=$bucket_name" -backend-config="dynamodb_table=$bucket_name" \
+      terraform -chdir=${config_dir}/terraform/cluster-templates/$template init -backend-config="bucket=$bucket_name" -backend-config="dynamodb_table=$bucket_name" \
           -backend-config="region=$awsRegion" -backend-config="key=$clusterName/$template_name/$resourceName/$template/$clusterName/terraform.tfstate" $lock -reconfigure  2>/tmp/state-$$ 1>&2
     else
       echo "Error initialising terraform state" >&2
@@ -92,9 +92,9 @@ do
   echo "variables..."
   cat /tmp/config.tfvars
 
-  terraform -chdir=terraform/cluster-templates/$template plan $lock -var-file=/tmp/config.tfvars -out $template.tfplan
+  terraform -chdir=${config_dir}/terraform/cluster-templates/$template plan $lock -var-file=/tmp/config.tfvars -out $template.tfplan
   if [ -n "${apply:-}" ]; then
-    terraform -chdir=terraform/cluster-templates/$template apply $lock -auto-approve $template.tfplan
+    terraform -chdir=${config_dir}/terraform/cluster-templates/$template apply $lock -auto-approve $template.tfplan
   fi
 
 
