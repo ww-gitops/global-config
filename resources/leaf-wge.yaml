@@ -22,6 +22,9 @@ spec:
       clusterName: ${wge_cluster_name}
       GitHubOrg: ${GITHUB_MGMT_ORG}
       GitHubRepo: ${GITHUB_MGMT_REPO}
+      globalGitHubOrg: ${GITHUB_GLOBAL_CONFIG_ORG}
+      globalGitHubRepo: ${GITHUB_GLOBAL_CONFIG_REPO}
+      globalGitHubBranch: ${global_config_branch}
       userEmail: ${USER_EMAIL}
       commitUser: ${GITHUB_USER}
       resourceName: kind

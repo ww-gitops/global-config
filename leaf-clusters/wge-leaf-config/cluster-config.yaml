@@ -8,6 +8,9 @@ data:
   clusterName: ${clusterName}
   GitHubOrg: ${GitHubOrg}
   GitHubRepo: ${GitHubRepo}
+  globalGitHubOrg: ${globalGitHubOrg}
+  globalGitHubRepo: ${globalGitHubRepo}
+  globalGitHubBranch: ${globalGitHubBranch}
   userEmail: ${userEmail}
   commitUser: ${commitUser}
   resourceName: ${resourceName}

@@ -45,7 +45,7 @@ spec:
   interval: 1m0s
   dependsOn:
     - name: flux-components
-  path: ./mgmt-cluster/flux
+  path: ./${target_path}/flux
   prune: true
   sourceRef:
     kind: GitRepository
