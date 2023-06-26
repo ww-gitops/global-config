@@ -12,8 +12,8 @@ data:
   scmType: github
   GitHubOrg: ${GITHUB_MGMT_ORG}
   GitHubRepo: ${GITHUB_MGMT_REPO}
-  globalGitHubOrg: ${GITHUB_GLOBAL_ORG}
-  globalGitHubRepo: ${GITHUB_GLOBAL_REPO}
+  globalGitHubOrg: ${GITHUB_GLOBAL_CONFIG_ORG}
+  globalGitHubRepo: ${GITHUB_GLOBAL_CONFIG_REPO}
   globalGitHubBranch: ${global_config_branch}
   awsAccountId: ac-${AWS_ACCOUNT_ID}
   prefixName: ${PREFIX_NAME}
