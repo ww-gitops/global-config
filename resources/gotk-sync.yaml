@@ -8,7 +8,7 @@ spec:
   interval: 1m0s
   ref:
     branch: ${global_config_branch}
-  url: https://github.com/${GITHUB_GLOBAL_ORG}/${GITHUB_GLOBAL_REPO}.git
+  url: https://github.com/${GITHUB_GLOBAL_CONFIG_ORG}/${GITHUB_GLOBAL_CONFIG_REPO}.git
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
