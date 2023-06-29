@@ -1,4 +1,4 @@
 dex
 vault
 flux-system
-ngnix
+ingress-nginx
