@@ -1,12 +1,12 @@
 clusters:
   - name: kind-u2-k1
     appsets:
-      name: appset-three
+    - name: appset-three
       
 appsets:
   - name: appset-three
     apps:
-    - name: podinfo-ms4
+      - name: podinfo-ms4
 
 apps:
   - name: podinfo-ms1
