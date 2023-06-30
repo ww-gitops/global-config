@@ -6,3 +6,4 @@ clusters:
 apps:
   - name: podinfo-ms3
     version: 6.3.6
+    namespace: podinfo
