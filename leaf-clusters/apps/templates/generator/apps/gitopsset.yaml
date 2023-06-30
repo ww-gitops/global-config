@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/part-of: gitopssets-controller
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: gitopssets-controller
-  name: ${resourceName}-appset-${appsetName}-app-${appName}
+  name: ${resourceName}-app-${appName}
   namespace: ${templateNamespace}
 spec:
   serviceAccountName: gitopssets
