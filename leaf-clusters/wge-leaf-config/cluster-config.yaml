@@ -35,3 +35,4 @@ data:
   resourceName: ${resourceName}
   templateNamespace: ${templateNamespace}
   clusterPrefix: ${clusterPrefix}
+  
