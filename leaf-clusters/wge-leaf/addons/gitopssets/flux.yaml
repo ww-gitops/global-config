@@ -26,7 +26,7 @@ spec:
         kind: HelmRepository
         name: weaveworks-artifacts-charts
         namespace: gitopssets-system
-      version: 0.10.0
+      version: 0.13.3
   install:
     crds: CreateReplace
   upgrade:
