@@ -1,29 +1,28 @@
+clusters:
+  - name: u2-k1
+    labels:
+      name: appset-three
+      
+appsets:
+  - name: appset-three
+    apps:
+    - name: podinfo-ms4
+
 apps:
   - name: podinfo-ms1
-    labels:
-      appset-one: true
     mode: local-folders
     path: ./kustomize
   - name: podinfo-ms2
-    labels:
-      appset-one: true
-      appset-two: true
     mode: apps-repos
     version: v6.3.5
   - name: podinfo-ms3
-    labels:
-      appset-two: true
     mode: apps-repos
     ref:
       type: tag
       value: v6.3.6
   - name: podinfo-ms4
-    labels:
-      appset-one: true
     mode: app-params
     params: ./leaf-clusters/apps/params/podinfo-ms4.yaml
   - name: podinfo-msX
     mode: local-folders
     version: 6.3.6
-    labels:
-      appset-not: true
