@@ -6,7 +6,7 @@ clusters:
 appsets:
   - name: appset-three
     apps:
-      - name: podinfo-ms4
+      - name: podinfo-ms3
 
 apps:
   - name: podinfo-ms3
