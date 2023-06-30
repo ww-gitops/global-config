@@ -3,3 +3,7 @@ clusters:
     apps:
       - name: podinfo-ms3
       - name: podinfo-ms4
+
+    namespaces:
+      - name: ms3
+      - name: ms4

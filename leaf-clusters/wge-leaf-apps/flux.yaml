@@ -5,7 +5,7 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   interval: 1m0s
-  path: ./leaf-clusters/apps/templates/generator/cluster
+  path: ./leaf-clusters/apps/templates/generator/cluster-apps
   prune: true
   wait: true
   sourceRef:
@@ -16,3 +16,5 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config
+    substitute:
+      target: namespace
