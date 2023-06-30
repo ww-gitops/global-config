@@ -29,7 +29,7 @@ spec:
   wait: true
   sourceRef:
     kind: GitRepository
-    name: global-config
+    name: flux-system
   postBuild:
     substitute:
       templateNamespace: wge
