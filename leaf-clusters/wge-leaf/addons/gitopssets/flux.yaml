@@ -26,8 +26,18 @@ spec:
         kind: HelmRepository
         name: weaveworks-artifacts-charts
         namespace: gitopssets-system
-      version: 0.13.3
+      version: 0.10.0
   install:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
+  values:
+    controllerManager:
+      args:
+        # - --health-probe-bind-address=:8081
+        # - --metrics-bind-address=127.0.0.1:8080
+        # - --leader-elect
+        - --enabled-generators=GitRepository,Cluster,List,APIClient,Matrix
+      manager:
+        image:
+          tag: v0.13.3
