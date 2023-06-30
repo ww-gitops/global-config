@@ -24,6 +24,6 @@ spec:
       chart: gitopssets-controller
       sourceRef:
         kind: HelmRepository
-        name: podinfo
+        name: ${appName}
         namespace: ${appName}
       version: ${appVersion}
