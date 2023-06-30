@@ -17,7 +17,7 @@ spec:
         files:
           - path: resource-descriptions/${templateNamespace}/${resourceName}.yaml
   templates:
-    - repeat: '{ .clusters[?(@.name=="${clusterName}")].appsets }'
+    - repeat: '{ .clusters[?(@.name=="${clusterName}")].apps }'
       content:
         kind: Kustomization
         apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
@@ -30,7 +30,7 @@ spec:
           sourceRef:
             kind: GitRepository
             name: global-config
-          path: ./leaf-clusters/apps/templates/generator/appsets
+          path: ./leaf-clusters/apps/templates/generator/apps
           prune: true
           wait: true
           timeout: 5m
@@ -39,4 +39,4 @@ spec:
               - kind: ConfigMap
                 name: cluster-config
             substitute:
-              appsetName: '{{ .Repeat.name }}'
+              appName: '{{ .Repeat.name }}'
