@@ -30,7 +30,7 @@ spec:
           sourceRef:
             kind: GitRepository
             name: global-config
-          path: ./leaf-clusters/apps/generator/appsets
+          path: ./leaf-clusters/apps/templates/generator/appsets
           prune: true
           wait: true
           timeout: 5m
