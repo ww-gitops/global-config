@@ -17,7 +17,7 @@ spec:
         files:
           - path: resource-descriptions/${templateNamespace}/${resourceName}.yaml
   templates:
-    - repeat: '{ .apps[?(@.name=="${appName}")] }'
+    - repeat: '{ .apps }'
       content:
         kind: Kustomization
         apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
