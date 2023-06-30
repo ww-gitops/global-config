@@ -1,0 +1,42 @@
+apiVersion: templates.weave.works/v1alpha1
+kind: GitOpsSet
+metadata:
+  labels:
+    app.kubernetes.io/name: gitopsset
+    app.kubernetes.io/instance: gitopsset-sample
+    app.kubernetes.io/part-of: gitopssets-controller
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: gitopssets-controller
+  name: ${resourceName}-cluster-appsets
+  namespace: ${templateNamespace}
+spec:
+  serviceAccountName: gitopssets
+  generators:
+    - gitRepository:
+        repositoryRef: global-config
+        files:
+          - path: resource-descriptions/${templateNamespace}/${resourceName}.yaml
+  templates:
+    - repeat: '{ .clusters[?(@.name=="${clusterName}")].appsets }'
+      content:
+        kind: Kustomization
+        apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+        metadata:
+          name: '${resourceName}-appset-{{ .Repeat.name }}'
+          annotations:
+            templates.weave.works/create-request: ''
+        spec:
+          interval: 1m0s
+          sourceRef:
+            kind: GitRepository
+            name: global-config
+          path: ./leaf-clusters/apps/generator/appsets
+          prune: true
+          wait: true
+          timeout: 5m
+          postBuild:
+            substituteFrom:
+              - kind: ConfigMap
+                name: cluster-config
+            substitute:
+              appsetName: '{{ .Repeat.name }}'

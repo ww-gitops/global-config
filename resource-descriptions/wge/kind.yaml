@@ -1,6 +1,6 @@
 clusters:
   - name: kind-u2-k1
-    labels:
+    appsets:
       name: appset-three
       
 appsets:
