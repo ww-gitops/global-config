@@ -15,7 +15,7 @@ data:
   globalGitHubOrg: ${GITHUB_GLOBAL_CONFIG_ORG}
   globalGitHubRepo: ${GITHUB_GLOBAL_CONFIG_REPO}
   globalGitHubBranch: ${global_config_branch}
-  awsAccountId: ac-${AWS_ACCOUNT_ID}
+  awsAccountId: "${AWS_ACCOUNT_ID}"
   prefixName: ${PREFIX_NAME}
   awsRegion: ${AWS_REGION}
   awsTagCreator: ${AWS_TAG_creator}

@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/part-of: gitopssets-controller
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: gitopssets-controller
-  name: ${resourceName}-cluster-apps
+  name: ${resourceName}-app-${appName}
   namespace: ${templateNamespace}
 spec:
   serviceAccountName: gitopssets
@@ -17,12 +17,12 @@ spec:
         files:
           - path: resource-descriptions/${templateNamespace}/${resourceName}.yaml
   templates:
-    - repeat: '{ .clusters[?(@.name=="${clusterName}")].apps }'
+    - repeat: '{ .apps[?(@.name=="${appName}")] }'
       content:
         kind: Kustomization
         apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
         metadata:
-          name: '${resourceName}-apps-{{ .Repeat.name }}'
+          name: ${resourceName}-app-{{ .Repeat.name }}
           annotations:
             templates.weave.works/create-request: ''
         spec:
@@ -30,7 +30,8 @@ spec:
           sourceRef:
             kind: GitRepository
             name: global-config
-          path: ./leaf-clusters/apps/templates/generator/apps
+            namespace: flux-system
+          path: ./leaf-clusters/apps/{{ .Repeat.name }}
           prune: true
           wait: true
           timeout: 5m
@@ -40,3 +41,7 @@ spec:
                 name: cluster-config
             substitute:
               appName: '{{ .Repeat.name }}'
+              appNamespace: '{{ getordefault .Repeat "namespace" "default" }}'
+              appVersion: '{{ getordefault .Repeat "version" "latest" }}'
+              # appPath: '{{ getordefault .Repeat "path" "./" }}'
+              # appParams: '{{ getordefault .Repeat "params" "none" }}'

@@ -11,6 +11,12 @@ data:
   globalGitHubOrg: ${globalGitHubOrg}
   globalGitHubRepo: ${globalGitHubRepo}
   globalGitHubBranch: ${globalGitHubBranch}
+  awsAccountId: "${AWS_ACCOUNT_ID}"
+  prefixName: ${prefixName}
+  awsRegion: ${awsRegion}
+  awsTagCreator: ${awsTagCreator}
+  awsTagCustomer: ${awsTagCustomer}
+  awsTagProjectGid: "${awsTagProjectGid}"
   userEmail: ${userEmail}
   commitUser: ${commitUser}
   resourceName: ${resourceName}
@@ -30,9 +36,15 @@ data:
   globalGitHubOrg: ${globalGitHubOrg}
   globalGitHubRepo: ${globalGitHubRepo}
   globalGitHubBranch: ${globalGitHubBranch}
+  awsAccountId: "${AWS_ACCOUNT_ID}"
+  prefixName: ${prefixName}
+  awsRegion: ${awsRegion}
+  awsTagCreator: ${awsTagCreator}
+  awsTagCustomer: ${awsTagCustomer}
+  awsTagProjectGid: "${awsTagProjectGid}"
   userEmail: ${userEmail}
   commitUser: ${commitUser}
   resourceName: ${resourceName}
-  templateNamespace: ${templateNamespace}
+  templateNamespace: flux-system
   clusterPrefix: ${clusterPrefix}
   

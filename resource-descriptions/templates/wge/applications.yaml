@@ -1,0 +1,10 @@
+namespaces:
+  - name: ms3
+  - name: ms4
+
+apps:
+  - name: podinfo-ms3
+    namespace: ms3
+
+  - name: podinfo-ms4
+    namespace: ms4

@@ -1,0 +1,5 @@
+clusters:
+  - name: kind-${LEAF_CLUSTER_NAME}
+    apps:
+      - name: podinfo-ms3
+      - name: podinfo-ms4

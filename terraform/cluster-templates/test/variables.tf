@@ -27,7 +27,7 @@ variable "tags" {
   description = "resource specific tags"
   default     = {
     customer   = "weaveworks-cx"
-    projectGid = "20276"
+    projectGid = "99999"
     creator    = "paul-carlton@weave.works"
   }
 }

@@ -38,7 +38,7 @@ args "$@"
 cluster_name=${CLUSTER_NAME:-mgmt}
 repository_name=${cluster_name}-wge
 
-export TF_VAR_prefix_name=${NAMES_PREFIX:-ww-20276}
+export TF_VAR_prefix_name=${NAMES_PREFIX:-ww-99999}
 export TF_VAR_region=${AWS_REGION:-us-west-2}
 bucket_name=${TF_VAR_prefix_name}-$(aws sts get-caller-identity --query Account --output text)-${TF_VAR_region}-${BUCKET_NAME:-tf-state}
 terraform -chdir=remote-state init

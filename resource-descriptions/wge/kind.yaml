@@ -1,9 +1,0 @@
-clusters:
-  - name: kind-u2-k1
-    apps:
-      - name: podinfo-ms3
-
-apps:
-  - name: podinfo-ms3
-    version: 6.3.6
-    namespace: podinfo
