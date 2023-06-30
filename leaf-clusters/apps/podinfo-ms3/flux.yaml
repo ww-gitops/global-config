@@ -21,7 +21,7 @@ spec:
   interval: 10m
   chart:
     spec:
-      chart: gitopssets-controller
+      chart: podinfo
       sourceRef:
         kind: HelmRepository
         name: ${appName}
