@@ -13,7 +13,7 @@ spec:
   serviceAccountName: gitopssets
   generators:
     - gitRepository:
-        repositoryRef: flux-system
+        repositoryRef: global-config
         files:
           - path: resource-descriptions/${templateNamespace}/${resourceName}.yaml
   templates:
