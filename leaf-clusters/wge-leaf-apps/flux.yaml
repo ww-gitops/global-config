@@ -5,7 +5,7 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   interval: 1m0s
-  path: ./leaf-clusters/apps/templates/generator
+  path: ./leaf-clusters/apps/templates/generator/cluster
   prune: true
   wait: true
   sourceRef:
