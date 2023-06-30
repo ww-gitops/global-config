@@ -1,5 +1,5 @@
 clusters:
-  - name: u2-k1
+  - name: kind-u2-k1
     labels:
       name: appset-three
       
