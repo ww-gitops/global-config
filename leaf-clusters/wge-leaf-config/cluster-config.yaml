@@ -21,7 +21,6 @@ data:
   commitUser: ${commitUser}
   resourceName: ${resourceName}
   templateNamespace: ${templateNamespace}
-  clusterPrefix: ${clusterPrefix}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -46,5 +45,4 @@ data:
   commitUser: ${commitUser}
   resourceName: ${resourceName}
   templateNamespace: flux-system
-  clusterPrefix: ${clusterPrefix}
   
