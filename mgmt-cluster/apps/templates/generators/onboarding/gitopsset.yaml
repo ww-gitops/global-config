@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/part-of: gitopssets-controller
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: gitopssets-controller
-  name: ${resourceName}-onborading
+  name: ${resourceName}-onboarding-namespaces
   namespace: ${templateNamespace}
 spec:
   serviceAccountName: gitopssets
@@ -15,14 +15,14 @@ spec:
     - gitRepository:
         repositoryRef: global-config
         files:
-          - path: resource-descriptions/wge/applications.yaml
+          - path: resource-descriptions/wge/namespaces.yaml
   templates:
-    - repeat: '{ .apps }'
+    - repeat: '{ .namespaces }'
       content:
         kind: Kustomization
         apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
         metadata:
-          name: ecr-repo-app-{{ .Repeat.name }}
+          name: ecr-repo-namespace-{{ .Repeat.name }}
           annotations:
             templates.weave.works/create-request: ''
         spec:
@@ -40,4 +40,71 @@ spec:
               - kind: ConfigMap
                 name: cluster-config
             substitute:
-              appName: '{{ .Repeat.name }}'
+              ecrName: 'ns-{{ .Repeat.name }}'
+---
+apiVersion: templates.weave.works/v1alpha1
+kind: GitOpsSet
+metadata:
+  labels:
+    app.kubernetes.io/name: gitopsset
+    app.kubernetes.io/instance: gitopsset-sample
+    app.kubernetes.io/part-of: gitopssets-controller
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: gitopssets-controller
+  name: ${resourceName}-onboarding-namespace-apps
+  namespace: ${templateNamespace}
+spec:
+  serviceAccountName: gitopssets
+  generators:
+    - gitRepository:
+        repositoryRef: global-config
+        files:
+          - path: resource-descriptions/wge/namespaces.yaml
+  templates:
+    - repeat: '{ .namespaces }'
+      content:
+        apiVersion: templates.weave.works/v1alpha1
+        kind: GitOpsSet
+        metadata:
+          annotations:
+            templates.weave.works/delimiters: "((,))"
+          labels:
+            app.kubernetes.io/name: gitopsset
+            app.kubernetes.io/instance: gitopsset-sample
+            app.kubernetes.io/part-of: gitopssets-controller
+            app.kubernetes.io/managed-by: kustomize
+            app.kubernetes.io/created-by: gitopssets-controller
+          name: ${resourceName}-onboarding-ns-{{ .Repeat.name }}-apps
+          namespace: ${templateNamespace}
+        spec:
+          serviceAccountName: gitopssets
+          generators:
+            - gitRepository:
+                repositoryRef: global-config
+                files:
+                  - path: resource-descriptions/wge/namespaces.yaml
+          templates:
+            - repeat: '{ .namespaces[?(@.name=="{{ .Repeat.name }}")].apps }'
+              content:
+                kind: Kustomization
+                apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+                metadata:
+                  name: ecr-repo-ns-{{ .Repeat.name }}-app-(( .Repeat.name ))
+                  annotations:
+                    templates.weave.works/create-request: ''
+                spec:
+                  interval: 1m0s
+                  sourceRef:
+                    kind: GitRepository
+                    name: global-config
+                    namespace: flux-system
+                  path: ./infra/dynamic/ecr-repo
+                  prune: true
+                  wait: true
+                  timeout: 5m
+                  postBuild:
+                    substituteFrom:
+                      - kind: ConfigMap
+                        name: cluster-config
+                    substitute:
+                      ecrName: 'ns-{{ .Repeat.name }}-app-(( .Repeat.name ))'

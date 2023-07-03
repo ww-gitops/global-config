@@ -18,8 +18,8 @@ spec:
   timeout: 5m
   postBuild:
     substitute:
-      resourceName: 
-      templateNamespace: 
+      resourceName: test
+      templateNamespace: kind
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config

@@ -1,5 +1,5 @@
 clusters:
   - name: kind-${LEAF_CLUSTER_NAME}
     namespaces:
-      - name: ms3
-      - name: ms4
+      - name: ms-a
+      - name: ms-b
