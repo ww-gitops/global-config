@@ -13,7 +13,7 @@ spec:
   serviceAccountName: gitopssets
   generators:
     - gitRepository:
-        repositoryRef: global-config
+        repositoryRef: flux-system
         files:
           - path: resource-descriptions/wge/namespaces.yaml
   templates:
@@ -80,7 +80,7 @@ spec:
           serviceAccountName: gitopssets
           generators:
             - gitRepository:
-                repositoryRef: global-config
+                repositoryRef: flux-system
                 files:
                   - path: resource-descriptions/wge/namespaces.yaml
           templates:
