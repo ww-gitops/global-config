@@ -11,7 +11,7 @@ data:
   globalGitHubOrg: ${globalGitHubOrg}
   globalGitHubRepo: ${globalGitHubRepo}
   globalGitHubBranch: ${globalGitHubBranch}
-  awsAccountId: "${awsAccountId}"
+  awsAccountId: \"${awsAccountId}\"
   prefixName: ${prefixName}
   awsRegion: ${awsRegion}
   awsTagCreator: ${awsTagCreator}
@@ -41,7 +41,7 @@ data:
   awsRegion: ${awsRegion}
   awsTagCreator: ${awsTagCreator}
   awsTagCustomer: ${awsTagCustomer}
-  awsTagProjectGid: "${awsTagProjectGid}"
+  awsTagProjectGid: \"${awsTagProjectGid}\"
   userEmail: ${userEmail}
   commitUser: ${commitUser}
   resourceName: ${resourceName}
