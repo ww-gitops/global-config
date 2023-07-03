@@ -17,6 +17,9 @@ spec:
   wait: true
   timeout: 5m
   postBuild:
+    substitute:
+      resourceName: 
+      templateNamespace: 
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config
