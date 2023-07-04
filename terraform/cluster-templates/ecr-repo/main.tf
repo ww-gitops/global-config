@@ -4,7 +4,7 @@ provider "aws" {
   default_tags {
     tags = merge({
       source  = "Terraform Managed"
-      cluster = var.cluster_name
+      repo = var.repo_name
     }, var.tags)
   }
 }
