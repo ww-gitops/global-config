@@ -50,3 +50,14 @@ spec:
                 spec:
                   interval: 10m
                   url: oci://${awsAccountId}.dkr.ecr.{awsRegion}.amazonaws.com/(( .Repeat.name ))
+
+            - repeat: '{ .clusters[?(@.name=="${clusterName}")].namespaces[?(@.name=="{{ .Repeat.name }}")].apps }'
+              content:
+                apiVersion: source.toolkit.fluxcd.io/v1beta2
+                kind: OCIRepository
+                metadata:
+                  name: ns-{{ .Repeat.name }}-app-(( .Repeat.name ))
+                  namespace: {{ .Repeat.name }}
+                spec:
+                  interval: 10m
+                  url: oci://${awsAccountId}.dkr.ecr.{awsRegion}.amazonaws.com/(( .Repeat.name ))
