@@ -1,15 +1,15 @@
 
 output "repository_arn" {
   description = "repository ARN"
-  value       = repo.arn
+  value       = aws_ecr_repository.repo.arn
 }
 
 output "repository_url" {
   description = "repository URL"
-  value       = repo.repository_url
+  value       = aws_ecr_repository.repo.repository_url
 }
 
 output "registry_id" {
   description = "Registry ID"
-  value       = repo.registry_id
+  value       = aws_ecr_repository.repo.registry_id
 }
