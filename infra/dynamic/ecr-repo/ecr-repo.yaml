@@ -10,7 +10,7 @@ spec:
   approvePlan: auto
   destroyResourcesOnDeletion: true
   writeOutputsToSecret:
-    name: '${repoName}-ecr-config'
+    name: '${ecrName}-ecr-config'
   backendConfig:
     customConfiguration: |
       backend "s3" {
