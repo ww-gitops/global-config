@@ -60,3 +60,4 @@ subjects:
 - kind: ServiceAccount
   name: gitopssets
   namespace: ${templateNamespace}
+---
