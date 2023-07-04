@@ -44,7 +44,7 @@ spec:
         apiVersion: kustomize.toolkit.fluxcd.io/v1
         kind: Kustomization
         metadata:
-          name: "ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}"
+          name: "ns-{{ .Element.namespace }}-app-{{ .Repeat.name }}"
           namespace: ${templateNamespace}
         spec:
           interval: 1m
@@ -53,7 +53,7 @@ spec:
           timeout: 5m
           sourceRef:
             kind: OCIRepository
-            name: "ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}"
+            name: "ns-{{ .Element.namespace }}-app-{{ .Repeat.name }}"
           path: ./
           postBuild:
             substituteFrom:
