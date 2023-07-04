@@ -1,0 +1,83 @@
+apiVersion: templates.weave.works/v1alpha1
+kind: GitOpsSet
+metadata:
+  labels:
+    app.kubernetes.io/name: gitopsset
+    app.kubernetes.io/instance: gitopsset-sample
+    app.kubernetes.io/part-of: gitopssets-controller
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: gitopssets-controller
+  name: ${resourceName}-ociapps
+  namespace: ${templateNamespace}
+spec:
+  serviceAccountName: gitopssets
+  generators:
+    - gitRepository:
+        repositoryRef: flux-system
+        files:
+          - path: resource-descriptions/wge/clusters.yaml
+  templates:
+    - repeat: '{ .namespaces }'
+      content:
+        apiVersion: source.toolkit.fluxcd.io/v1beta2
+        kind: OCIRepository
+        metadata:
+          name: ns-{{ .Element.name }}-app-{{ .Repeat.name }}
+          namespace: ${templateNamespace}
+        spec:
+          interval: 10m
+          url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/{{ .Repeat.name }}
+
+    - repeat: '{ .namespaces }'
+      content:
+        apiVersion: kustomize.toolkit.fluxcd.io/v1
+        kind: Kustomization
+        metadata:
+          name: ns-{{ .Element.name }}}-app-{{ .Repeat.name }}
+          namespace: ${templateNamespace}
+        spec:
+          interval: 1m
+          prune: true
+          wait: true
+          timeout: 5m
+          sourceRef:
+            kind: OCIRepository
+            name: ns-{{ .Element.name }}}-app-{{ .Repeat.name }}
+          path: ./
+          postBuild:
+            substituteFrom:
+              - kind: ConfigMap
+                name: cluster-config
+            substitute:
+              appName: '{{ .Repeat.name }}'
+
+# apiVersion: templates.weave.works/v1alpha1
+# kind: GitOpsSet
+# metadata:
+#   name: repeated-gitopsset-sample
+# spec:
+#   generators:
+#     - list:
+#         elements:
+#           - env: dev
+#             team: dev-team
+#             teams:
+#               - name: "team1"
+#               - name: "team2"
+#               - name: "team3"
+#           - env: staging
+#             team: staging-team
+#             teams:
+#               - name: "team4"
+#               - name: "team5"
+#               - name: "team6"
+#   templates:
+#     - repeat: "{ .teams }"
+#       content:
+#         kind: ConfigMap
+#         apiVersion: v1
+#         metadata:
+#           name: "{{ .Repeat.name }}-demo"
+#         data:
+#           name: "{{ .Repeat.name }}-demo"
+#           team: "{{ .Element.team }}"
