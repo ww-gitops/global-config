@@ -33,18 +33,18 @@ spec:
         apiVersion: source.toolkit.fluxcd.io/v1beta2
         kind: OCIRepository
         metadata:
-          name: ns-{{ .Element.namespace }}-app-{{ .Repeat.name }}
+          name: "ns-{{ .Element.namespace }}-app-{{ .Repeat.name }}"
           namespace: ${templateNamespace}
         spec:
           interval: 10m
-          url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/{{ .Repeat.name }}
+          url: "oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/{{ .Repeat.name }}"
 
     - repeat: '{ .apps }'
       content:
         apiVersion: kustomize.toolkit.fluxcd.io/v1
         kind: Kustomization
         metadata:
-          name: ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}
+          name: "ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}"
           namespace: ${templateNamespace}
         spec:
           interval: 1m
@@ -53,7 +53,7 @@ spec:
           timeout: 5m
           sourceRef:
             kind: OCIRepository
-            name: ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}
+            name: "ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}"
           path: ./
           postBuild:
             substituteFrom:
