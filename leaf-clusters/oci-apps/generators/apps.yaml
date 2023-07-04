@@ -49,7 +49,7 @@ spec:
                   namespace: ${templateNamespace}
                 spec:
                   interval: 10m
-                  url: oci://${awsAccountId}.dkr.ecr.{awsRegion}.amazonaws.com/(( .Repeat.name ))
+                  url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/(( .Repeat.name ))
 
             - repeat: '{ .namespaces[?(@.name=="{{ .Repeat.name }}")].apps }'
               content:
