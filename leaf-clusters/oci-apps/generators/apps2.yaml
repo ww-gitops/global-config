@@ -28,16 +28,16 @@ spec:
               - name: podinfo-ms3
               - name: podinfo-ms4
   templates:
-    - repeat: '{ .apps }'
-      content:
-        apiVersion: source.toolkit.fluxcd.io/v1beta2
-        kind: OCIRepository
-        metadata:
-          name: "ns-{{ .Element.namespace }}-app-{{ .Repeat.name }}"
-          namespace: ${templateNamespace}
-        spec:
-          interval: 10m
-          url: "oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/{{ .Repeat.name }}"
+    # - repeat: '{ .apps }'
+    #   content:
+    #     apiVersion: source.toolkit.fluxcd.io/v1beta2
+    #     kind: OCIRepository
+    #     metadata:
+    #       name: "ns-{{ .Element.namespace }}-app-{{ .Repeat.name }}"
+    #       namespace: ${templateNamespace}
+    #     spec:
+    #       interval: 10m
+    #       url: "oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/{{ .Repeat.name }}"
 
     - repeat: '{ .apps }'
       content:
