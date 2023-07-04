@@ -11,22 +11,22 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   serviceAccountName: gitopssets
-  # generators:
-  #   - gitRepository:
-  #       repositoryRef: flux-system
-  #       files:
-  #         - path: resource-descriptions/wge/namespaces.yaml
   generators:
-    - list:
-        elements:
-          - namespace: ms-a
-            apps:
-              - name: podinfo-ms1
-              - name: podinfo-ms2
-          - namespace: ms-b
-            apps:
-              - name: podinfo-ms3
-              - name: podinfo-ms4
+    - gitRepository:
+        repositoryRef: flux-system
+        files:
+          - path: resource-descriptions/wge/namespaces.yaml
+  # generators:
+  #   - list:
+  #       elements:
+  #         - namespace: ms-a
+  #           apps:
+  #             - name: podinfo-ms1
+  #             - name: podinfo-ms2
+  #         - namespace: ms-b
+  #           apps:
+  #             - name: podinfo-ms3
+  #             - name: podinfo-ms4
   templates:
     - repeat: '{ .apps }'
       content:
