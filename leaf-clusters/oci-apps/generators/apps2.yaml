@@ -11,18 +11,29 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   serviceAccountName: gitopssets
+  # generators:
+  #   - gitRepository:
+  #       repositoryRef: flux-system
+  #       files:
+  #         - path: resource-descriptions/wge/namespaces.yaml
   generators:
-    - gitRepository:
-        repositoryRef: flux-system
-        files:
-          - path: resource-descriptions/wge/namespaces.yaml
+    - list:
+        elements:
+          - namespace: ms-a
+            apps:
+              - name: podinfo-ms1
+              - name: podinfo-ms2
+          - namespace: ms-b
+            apps:
+              - name: podinfo-ms3
+              - name: podinfo-ms4
   templates:
     - repeat: '{ .apps }'
       content:
         apiVersion: source.toolkit.fluxcd.io/v1beta2
         kind: OCIRepository
         metadata:
-          name: ns-{{ .Element.name }}-app-{{ .Repeat.name }}
+          name: ns-{{ .Element.namespace }}-app-{{ .Repeat.name }}
           namespace: ${templateNamespace}
         spec:
           interval: 10m
@@ -33,7 +44,7 @@ spec:
         apiVersion: kustomize.toolkit.fluxcd.io/v1
         kind: Kustomization
         metadata:
-          name: ns-{{ .Element.name }}}-app-{{ .Repeat.name }}
+          name: ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}
           namespace: ${templateNamespace}
         spec:
           interval: 1m
@@ -42,7 +53,7 @@ spec:
           timeout: 5m
           sourceRef:
             kind: OCIRepository
-            name: ns-{{ .Element.name }}}-app-{{ .Repeat.name }}
+            name: ns-{{ .Element.namespace }}}-app-{{ .Repeat.name }}
           path: ./
           postBuild:
             substituteFrom:
