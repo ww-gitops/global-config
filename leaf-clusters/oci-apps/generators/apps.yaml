@@ -53,11 +53,22 @@ spec:
 
             - repeat: '{ .namespaces[?(@.name=="{{ .Repeat.name }}")].apps }'
               content:
-                apiVersion: source.toolkit.fluxcd.io/v1beta2
-                kind: OCIRepository
+                apiVersion: kustomize.toolkit.fluxcd.io/v1
+                kind: Kustomization
                 metadata:
                   name: ns-{{ .Repeat.name }}-app-(( .Repeat.name ))
                   namespace: ${templateNamespace}
                 spec:
-                  interval: 10m
-                  url: oci://${awsAccountId}.dkr.ecr.{awsRegion}.amazonaws.com/(( .Repeat.name ))
+                  prune: true
+                  wait: true
+                  timeout: 5m
+                  sourceRef:
+                    kind: OCIRepository
+                    name: ns-{{ .Repeat.name }}-app-(( .Repeat.name ))
+                  path: ./
+                  postBuild:
+                    substituteFrom:
+                      - kind: ConfigMap
+                        name: cluster-config
+                    substitute:
+                      appName: '{{ .Repeat.name }}'
