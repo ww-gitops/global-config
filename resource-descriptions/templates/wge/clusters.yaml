@@ -3,3 +3,7 @@ clusters:
     namespaces:
       - name: ms-a
       - name: ms-b
+
+  - name: test-c1
+    namespaces:
+      - name: ms-b
