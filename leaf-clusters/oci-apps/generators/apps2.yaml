@@ -15,7 +15,7 @@ spec:
     - gitRepository:
         repositoryRef: flux-system
         files:
-          - path: resource-descriptions/wge/clusters.yaml
+          - path: resource-descriptions/wge/namespaces.yaml
   templates:
     - repeat: '{ .apps }'
       content:
