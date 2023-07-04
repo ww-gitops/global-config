@@ -59,6 +59,7 @@ spec:
                   name: ns-{{ .Repeat.name }}-app-(( .Repeat.name ))
                   namespace: ${templateNamespace}
                 spec:
+                  interval: 1m
                   prune: true
                   wait: true
                   timeout: 5m
