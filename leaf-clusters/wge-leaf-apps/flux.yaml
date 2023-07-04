@@ -40,3 +40,4 @@ spec:
     substitute:
       resourceName: test
       templateNamespace: wge
+      clusterName: kind-u2-k1
