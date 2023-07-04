@@ -1,7 +1,7 @@
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: ecr-${appName}
+  name: ecr-${ecrName}
   namespace: ${templateNamespace}
 spec:
   interval: 10m

@@ -41,6 +41,8 @@ spec:
                 name: cluster-config
             substitute:
               ecrName: 'ns-{{ .Repeat.name }}'
+              templateNamespace: ${templateNamespace}
+              resourceName: ${resourceName}
 ---
 apiVersion: templates.weave.works/v1alpha1
 kind: GitOpsSet
@@ -108,3 +110,5 @@ spec:
                         name: cluster-config
                     substitute:
                       ecrName: 'ns-{{ .Repeat.name }}-app-(( .Repeat.name ))'
+                      templateNamespace: ${templateNamespace}
+                      resourceName: ${resourceName}
