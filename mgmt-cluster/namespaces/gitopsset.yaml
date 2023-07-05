@@ -26,6 +26,7 @@ spec:
           annotations:
             templates.weave.works/create-request: ''
         spec:
+          suspend: true
           interval: 1m0s
           sourceRef:
             kind: GitRepository
