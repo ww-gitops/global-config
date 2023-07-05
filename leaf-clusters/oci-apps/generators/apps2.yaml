@@ -15,7 +15,7 @@ spec:
     - gitRepository:
         repositoryRef: flux-system
         files:
-          - path: resource-descriptions/wge/namespaces.yaml
+          - path: resource-descriptions/wge/namespaces/ms-a.yaml
   # generators:
   #   - list:
   #       elements:
