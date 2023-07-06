@@ -14,15 +14,15 @@ spec:
   generators:
     - gitRepository:
         repositoryRef: flux-system
-        files:
-          - path: resource-descriptions/wge/clusters.yaml
+        directories:
+          - path: resource-descriptions/wge/clusters/*
   templates:
     - repeat: '{ .clusters }'
       content:
         kind: Kustomization
         apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
         metadata:
-          name: ecr-repo-cluster-{{ .Repeat.name }}
+          name: ecr-repo-cluster-{{ trimSuffix ".yaml" .Repeat.name }}
           annotations:
             templates.weave.works/create-request: ''
         spec:
@@ -40,7 +40,7 @@ spec:
               - kind: ConfigMap
                 name: cluster-config
             substitute:
-              ecrName: 'cluster-{{ .Repeat.name }}'
+              ecrName: 'cluster-{{ trimSuffix ".yaml" .Repeat.name }}'
               templateNamespace: ${templateNamespace}
               resourceName: ${resourceName}
 ---
