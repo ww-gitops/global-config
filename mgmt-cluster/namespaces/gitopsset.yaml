@@ -10,6 +10,7 @@ metadata:
   name: namespaces
   namespace: flux-system
 spec:
+  suspend: ${suspendNamespaceGitopsSet}
   serviceAccountName: gitopssets
   generators:
     - gitRepository:
@@ -26,7 +27,6 @@ spec:
           annotations:
             templates.weave.works/create-request: ''
         spec:
-          suspend: ${suspendNamespaceGitopsSet}
           interval: 1m0s
           sourceRef:
             kind: GitRepository
