@@ -8,7 +8,7 @@ networking:
   # You may choose a specific port but probably don't need to in most cases.
   # Using a random port makes it easier to spin up multiple clusters.
   apiServerPort: ${listen_port}
-  certExtraSans: {public_ip}
+  # certExtraSans: {public_ip}
 nodes:
 - role: control-plane
   kubeadmConfigPatches:
