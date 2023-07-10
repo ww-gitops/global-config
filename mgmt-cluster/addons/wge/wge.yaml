@@ -60,7 +60,7 @@ spec:
           - path: /?(.*)
             pathType: ImplementationSpecific
     config:
-      logLevel: info
+      logLevel: debug
       git:
         type: github
         hostname: github.com
