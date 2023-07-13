@@ -104,11 +104,10 @@ spec:
   generators:
     - gitRepository:
         repositoryRef: flux-system
-        files:
-          - path: resource-descriptions/wge/namespaces.yaml
+        directories:
+          - path: resource-descriptions/wge/namespaces/*
   templates:
-    - repeat: '{ .namespaces }'
-      content:
+    - content:
         apiVersion: templates.weave.works/v1alpha1
         kind: GitOpsSet
         metadata:
@@ -120,7 +119,7 @@ spec:
             app.kubernetes.io/part-of: gitopssets-controller
             app.kubernetes.io/managed-by: kustomize
             app.kubernetes.io/created-by: gitopssets-controller
-          name: ${resourceName}-onboarding-ns-{{ .Repeat.name }}-apps
+          name: ${resourceName}-onboarding-ns-{{ trimSuffix ".yaml" .Element.Base }}-apps
           namespace: ${templateNamespace}
         spec:
           serviceAccountName: gitopssets
@@ -128,14 +127,14 @@ spec:
             - gitRepository:
                 repositoryRef: flux-system
                 files:
-                  - path: resource-descriptions/wge/namespaces.yaml
+                  - path: resource-descriptions/wge/namespaces/{{ .Element.Base }}
           templates:
-            - repeat: '{ .namespaces[?(@.name=="{{ .Repeat.name }}")].apps }'
+            - repeat: '{ .apps }'
               content:
                 kind: Kustomization
                 apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
                 metadata:
-                  name: ecr-repo-ns-{{ .Repeat.name }}-app-(( .Repeat.name ))
+                  name: ecr-repo-ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))
                   annotations:
                     templates.weave.works/create-request: ''
                 spec:
@@ -153,6 +152,6 @@ spec:
                       - kind: ConfigMap
                         name: cluster-config
                     substitute:
-                      ecrName: 'ns-{{ .Repeat.name }}-app-(( .Repeat.name ))'
+                      ecrName: 'ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))'
                       templateNamespace: ${templateNamespace}
                       resourceName: ${resourceName}
