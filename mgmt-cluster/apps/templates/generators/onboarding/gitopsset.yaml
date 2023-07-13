@@ -15,7 +15,7 @@ spec:
     - gitRepository:
         repositoryRef: flux-system
         directories:
-          - path: resource-descriptions/wge/clusters.yaml
+          - path: resource-descriptions/wge/clusters/*
   templates:
     - content:
         kind: Kustomization
