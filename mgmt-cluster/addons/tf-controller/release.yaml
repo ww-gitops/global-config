@@ -23,6 +23,7 @@ spec:
   interval: 1m0s
   timeout: 5m
   values:
+    allowBreakTheGlass: true
     image:
       # repository: pcarlton/tf-controller
       tag: "v0.15.0-rc.5"
