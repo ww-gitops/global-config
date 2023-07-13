@@ -60,15 +60,14 @@ spec:
   generators:
     - gitRepository:
         repositoryRef: flux-system
-        files:
-          - path: resource-descriptions/wge/namespaces.yaml
+        directories:
+          - path: resource-descriptions/wge/namespaces/*
   templates:
-    - repeat: '{ .namespaces }'
-      content:
+    - content:
         kind: Kustomization
         apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
         metadata:
-          name: ecr-repo-namespace-{{ .Repeat.name }}
+          name: ecr-repo-namespace-{{ trimSuffix .yaml .Element.Base }}
           annotations:
             templates.weave.works/create-request: ''
         spec:
@@ -86,7 +85,7 @@ spec:
               - kind: ConfigMap
                 name: cluster-config
             substitute:
-              ecrName: 'ns-{{ .Repeat.name }}'
+              ecrName: 'ns-{{ trimSuffix .yaml .Element.Base }}'
               templateNamespace: ${templateNamespace}
               resourceName: ${resourceName}
 ---
