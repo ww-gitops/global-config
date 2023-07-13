@@ -1,3 +1,0 @@
-clusters:
-  - name: ${LEAF_CLUSTER_NAME}
-
