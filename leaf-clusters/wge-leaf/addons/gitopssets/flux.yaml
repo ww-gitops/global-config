@@ -9,7 +9,7 @@ metadata:
   name: weaveworks-artifacts-charts
   namespace: gitopssets-system
 spec:
-  interval: 1m
+  interval: 10m
   url: https://artifacts.wge.dev.weave.works/dev/charts
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2beta1

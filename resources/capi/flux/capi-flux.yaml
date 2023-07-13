@@ -4,7 +4,7 @@ metadata:
   name: capi
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   dependsOn:
     - name: wge
   path: ./mgmt-cluster/bases/capi
@@ -24,7 +24,7 @@ metadata:
   name: capi-templates
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   dependsOn:
     - name: wge
     - name: capi
@@ -45,7 +45,7 @@ metadata:
   name: capi-clusters
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   dependsOn:
     - name: capi-templates
   path: ./clusters/management/clusters/default

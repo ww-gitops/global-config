@@ -4,7 +4,7 @@ metadata:
   name: wge-sa
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./leaf-clusters/wge-sa
   prune: true
   wait: true
@@ -23,7 +23,7 @@ metadata:
 spec:
   dependsOn:
     - name: wge-sa
-  interval: 1m0s
+  interval: 10m0s
   path: ./clusters/kind/$hostname-$cluster_name/wge
   prune: true
   wait: true

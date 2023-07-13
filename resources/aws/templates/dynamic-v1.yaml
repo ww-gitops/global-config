@@ -70,7 +70,7 @@ spec:
                     annotations:
                       templates.weave.works/create-request: ''
                   spec:
-                    interval: 1m0s
+                    interval: 10m0s
                     sourceRef:
                       kind: GitRepository
                       name: global-config
@@ -121,7 +121,7 @@ spec:
                     annotations:
                       templates.weave.works/create-request: ''
                   spec:
-                    interval: 1m0s
+                    interval: 10m0s
                     sourceRef:
                       kind: GitRepository
                       name: global-config
@@ -165,7 +165,7 @@ spec:
                     annotations:
                       templates.weave.works/create-request: ''
                   spec:
-                    interval: 1m0s
+                    interval: 10m0s
                     dependsOn:
                       - name: '{{ getordefault .Repeat "vpc_resource" "(( .params.RESOURCE_NAME ))" }}-vpc-{{ .Repeat.vpc_name }}'
                     sourceRef:
@@ -217,7 +217,7 @@ spec:
                     annotations:
                       templates.weave.works/create-request: ''
                   spec:
-                    interval: 1m0s
+                    interval: 10m0s
                     dependsOn:
                       - name: '{{ getordefault .Repeat "vpc_resource" "(( .params.RESOURCE_NAME ))" }}-vpc-{{ .Repeat.vpc_name }}'
                     sourceRef:
@@ -266,7 +266,7 @@ spec:
                     annotations:
                       templates.weave.works/create-request: ''
                   spec:
-                    interval: 1m0s
+                    interval: 10m0s
                     dependsOn:
                       - name: '(( .params.RESOURCE_NAME ))-eks-{{ .Repeat.name }}'
                     sourceRef:
@@ -324,7 +324,7 @@ spec:
                     annotations:
                       templates.weave.works/create-request: ''
                   spec:
-                    interval: 1m0s
+                    interval: 10m0s
                     dependsOn:
                       - name: '(( .params.RESOURCE_NAME ))-eks-config-{{ .Repeat.name }}'
                     sourceRef:
@@ -378,7 +378,7 @@ spec:
                   spec:
                     dependsOn:
                       - name: '(( .params.RESOURCE_NAME ))-eks-config-{{ .Repeat.name }}'
-                    interval: 1m0s
+                    interval: 10m0s
                     path: ./leaf-clusters/wge/kubeconfig
                     postBuild:
                       substituteFrom:
@@ -428,7 +428,7 @@ spec:
                   spec:
                     dependsOn:
                       - name: '(( .params.RESOURCE_NAME ))-gitops-kubeconfig-{{ .Repeat.name }}'
-                    interval: 1m0s
+                    interval: 10m0s
                     path: ./leaf-clusters/wge/gitops-cluster
                     postBuild:
                       substituteFrom:
@@ -454,7 +454,7 @@ spec:
     #         annotations:
     #           templates.weave.works/create-request: ''
     #       spec:
-    #         interval: 1m0s
+    #         interval: 10m0s
     #         sourceRef:
     #           kind: GitRepository
     #           name: global-config
@@ -503,7 +503,7 @@ spec:
         #             annotations:
         #               templates.weave.works/create-request: ''
         #           spec:
-        #             interval: 1m0s
+        #             interval: 10m0s
         #             sourceRef:
         #               kind: GitRepository
         #               name: global-config

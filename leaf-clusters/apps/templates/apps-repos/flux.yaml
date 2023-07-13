@@ -5,7 +5,7 @@ metadata:
   name: ${appName}
   namespace: ${templateNamespace}
 spec:
-  interval: 1m0s
+  interval: 10m0s
   ref:
     ${appRefType}: ${appRefValue}
   url: ssh://git@github.com/ww-gitops/${appName}
@@ -16,7 +16,7 @@ metadata:
   name: ${appName}
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ${appPath}
   prune: true
   sourceRef:

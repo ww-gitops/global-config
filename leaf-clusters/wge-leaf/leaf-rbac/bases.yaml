@@ -5,7 +5,7 @@ metadata:
   name: wge-bases
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./mgmt-cluster/bases/rbac
   prune: true
   wait: true

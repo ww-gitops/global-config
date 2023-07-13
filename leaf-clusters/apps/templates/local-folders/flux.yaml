@@ -4,7 +4,7 @@ metadata:
   name: ${appName}
   namespace: ${templateNamespace}
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./leaf-clusters/apps/${appName}
   prune: true
   sourceRef:

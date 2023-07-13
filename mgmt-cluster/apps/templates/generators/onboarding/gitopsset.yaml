@@ -25,7 +25,7 @@ spec:
           annotations:
             templates.weave.works/create-request: ''
         spec:
-          interval: 1m0s
+          interval: 10m0s
           sourceRef:
             kind: GitRepository
             name: global-config
@@ -70,7 +70,7 @@ spec:
           annotations:
             templates.weave.works/create-request: ''
         spec:
-          interval: 1m0s
+          interval: 10m0s
           sourceRef:
             kind: GitRepository
             name: global-config
@@ -138,7 +138,7 @@ spec:
                   annotations:
                     templates.weave.works/create-request: ''
                 spec:
-                  interval: 1m0s
+                  interval: 10m0s
                   sourceRef:
                     kind: GitRepository
                     name: global-config

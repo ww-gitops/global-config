@@ -4,7 +4,7 @@ metadata:
   name: kind-${hostname}-${cluster_name}-gitops-kubeconfig
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./leaf-clusters/wge/kubeconfig
   postBuild:
     substituteFrom:
@@ -31,7 +31,7 @@ metadata:
 spec:
   dependsOn:
     - name: kind-${hostname}-${cluster_name}-gitops-kubeconfig
-  interval: 1m0s
+  interval: 10m0s
   path: ./leaf-clusters/wge/gitops-cluster
   postBuild:
     substituteFrom:

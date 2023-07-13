@@ -5,7 +5,7 @@ metadata:
   name: global-config
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   ref:
     branch: ${global_config_branch}
   url: https://github.com/${GITHUB_GLOBAL_CONFIG_ORG}/${GITHUB_GLOBAL_CONFIG_REPO}
@@ -29,7 +29,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   ref:
     branch: main
   secretRef:
@@ -42,7 +42,7 @@ metadata:
   name: flux-system
   namespace: flux-system
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./${target_path}/flux
   prune: true
   sourceRef:

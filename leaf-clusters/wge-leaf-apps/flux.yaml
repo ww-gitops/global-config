@@ -4,7 +4,7 @@
 #   name: ${resourceName}-apps
 #   namespace: ${templateNamespace}
 # spec:
-#   interval: 1m0s
+#   interval: 10m0s
 #   path: ./leaf-clusters/apps/templates/generator/cluster-apps
 #   prune: true
 #   wait: true
@@ -25,7 +25,7 @@ metadata:
   name: ${resourceName}-oci-apps
   namespace: ${templateNamespace}
 spec:
-  interval: 1m0s
+  interval: 10m0s
   path: ./leaf-clusters/oci-apps/generators
   prune: true
   wait: true
