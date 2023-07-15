@@ -24,6 +24,15 @@ resource "github_repository_file" "leaf_config" {
       resourceName: ${var.resource_name}
       templateNamespace: ${var.template_namespace}
       clusterPrefix: ${var.cluster_prefix}
+      globalGitHubOrg: ${var.globalGitHubOrg}
+      globalGitHubRepo: ${var.globalGitHubRepo}
+      globalGitHubBranch: ${var.globalGitHubBranch}
+      awsAccountId: "${awsAccountId}"
+      prefixName: ${prefixName}
+      awsRegion: ${awsRegion}
+      awsTagCreator: ${awsTagCreator}
+      awsTagCustomer: ${awsTagCustomer}
+      awsTagProjectGid: ${awsTagProjectGid}
     EOF
   })
   commit_author       = var.git_commit_author
@@ -44,15 +53,15 @@ resource "github_repository_file" "leaf-addons" {
     timeout    = "5m"
     depends_on = ["wge-leaf-config"]
     config     = true
-    substitute = <<-EOF
-      clusterName: ${var.cluster_name}
-      GitHubOrg: ${var.github_owner}
-      GitHubRepo: ${var.repository_name}
-      userEmail: ${var.git_commit_email}
-      commitUser: ${var.git_commit_author}
-      resourceName: ${var.resource_name}
-      templateNamespace: ${var.template_namespace}
-    EOF
+    # substitute = <<-EOF
+    #   clusterName: ${var.cluster_name}
+    #   GitHubOrg: ${var.github_owner}
+    #   GitHubRepo: ${var.repository_name}
+    #   userEmail: ${var.git_commit_email}
+    #   commitUser: ${var.git_commit_author}
+    #   resourceName: ${var.resource_name}
+    #   templateNamespace: ${var.template_namespace}
+    # EOF
   })
   commit_author       = var.git_commit_author
   commit_email        = var.git_commit_email
@@ -72,15 +81,15 @@ resource "github_repository_file" "leaf-apps" {
     timeout    = "5m"
     depends_on = ["wge-leaf"]
     config     = true
-    substitute = <<-EOF
-      clusterName: ${var.cluster_name}
-      GitHubOrg: ${var.github_owner}
-      GitHubRepo: ${var.repository_name}
-      userEmail: ${var.git_commit_email}
-      commitUser: ${var.git_commit_author}
-      resourceName: ${var.resource_name}
-      templateNamespace: ${var.template_namespace}
-    EOF
+    # substitute = <<-EOF
+    #   clusterName: ${var.cluster_name}
+    #   GitHubOrg: ${var.github_owner}
+    #   GitHubRepo: ${var.repository_name}
+    #   userEmail: ${var.git_commit_email}
+    #   commitUser: ${var.git_commit_author}
+    #   resourceName: ${var.resource_name}
+    #   templateNamespace: ${var.template_namespace}
+    # EOF
   })
   commit_author       = var.git_commit_author
   commit_email        = var.git_commit_email
