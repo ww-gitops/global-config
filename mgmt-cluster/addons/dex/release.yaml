@@ -36,8 +36,8 @@ spec:
       requests:
         cpu: 100m
         memory: 64Mi
-    imagePullSecrets:
-      - name: dockerconfigjson-github-com
+    # imagePullSecrets:
+    #   - name: dockerconfigjson-github-com
     ingress:
       enabled: true
       annotations:
