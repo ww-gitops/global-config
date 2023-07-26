@@ -36,3 +36,6 @@ spec:
       #     eks.amazonaws.com/role-arn: ${tfRunnerRoleArn}
       grpc:
         maxMessageSize: 30
+    certRotationCheckFrequency: 3m0s
+    certValidityDuration: 5m
+    caCertValidityDuration: 10m
