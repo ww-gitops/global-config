@@ -13,9 +13,9 @@ spec:
   serviceAccountName: gitopssets
   generators:
     - gitRepository:
-        repositoryRef: flux-system
+        repositoryRef: clusters
         directories:
-          - path: resource-descriptions/wge/clusters/*
+          - path: resource-descriptions/clusters/*
   templates:
     - content:
         kind: Kustomization
@@ -58,9 +58,9 @@ spec:
   serviceAccountName: gitopssets
   generators:
     - gitRepository:
-        repositoryRef: flux-system
+        repositoryRef: clusters
         directories:
-          - path: resource-descriptions/wge/namespaces/*
+          - path: resource-descriptions/namespaces/*
   templates:
     - content:
         kind: Kustomization
