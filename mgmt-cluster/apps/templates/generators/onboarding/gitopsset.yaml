@@ -1,3 +1,4 @@
+# Create ECR repository and any other AWS resources required for Flux application deployment to cluster
 apiVersion: templates.weave.works/v1alpha1
 kind: GitOpsSet
 metadata:
@@ -7,8 +8,8 @@ metadata:
     app.kubernetes.io/part-of: gitopssets-controller
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: gitopssets-controller
-  name: ${resourceName}-onboarding-clusters
-  namespace: ${templateNamespace}
+  name: onboarding-clusters
+  namespace: flux-apps
 spec:
   serviceAccountName: gitopssets
   generators:
@@ -17,31 +18,56 @@ spec:
         directories:
           - path: resource-descriptions/clusters/*
   templates:
-    - content:
-        kind: Kustomization
-        apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-        metadata:
-          name: ecr-repo-cluster-{{ trimSuffix ".yaml" .Element.Base }}
-          annotations:
-            templates.weave.works/create-request: ''
-        spec:
-          interval: 10m0s
-          sourceRef:
-            kind: GitRepository
-            name: global-config
-            namespace: flux-system
-          path: ./infra/dynamic/ecr-repo
-          prune: true
-          wait: true
-          timeout: 5m
-          postBuild:
-            substituteFrom:
-              - kind: ConfigMap
-                name: cluster-config
-            substitute:
-              ecrName: 'cluster-{{ trimSuffix ".yaml" .Element.Base }}'
-              templateNamespace: ${templateNamespace}
-              resourceName: ${resourceName}
+    content:
+      kind: Kustomization
+      apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+      metadata:
+        name: ecr-repo-cluster-{{ trimSuffix ".yaml" .Element.Base }}
+        annotations:
+          templates.weave.works/create-request: ''
+      spec:
+        interval: 10m0s
+        sourceRef:
+          kind: GitRepository
+          name: global-config
+          namespace: flux-system
+        path: ./infra/dynamic/ecr-repo
+        prune: true
+        wait: true
+        timeout: 5m
+        postBuild:
+          substituteFrom:
+            - kind: ConfigMap
+              name: cluster-config
+          substitute:
+            ecrName: 'cluster-{{ trimSuffix ".yaml" .Element.Base }}'
+            templateNamespace: flux-apps
+            resourceName: test1
+---
+kind: Kustomization
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+metadata:
+name: ecr-repo-templates
+annotations:
+  templates.weave.works/create-request: ''
+spec:
+  interval: 10m0s
+  sourceRef:
+    kind: GitRepository
+    name: global-config
+    namespace: flux-system
+  path: ./infra/dynamic/ecr-repo
+  prune: true
+  wait: true
+  timeout: 5m
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
+    substitute:
+      ecrName: templates
+      templateNamespace: flux-apps
+      resourceName: test1
 ---
 apiVersion: templates.weave.works/v1alpha1
 kind: GitOpsSet
@@ -52,8 +78,8 @@ metadata:
     app.kubernetes.io/part-of: gitopssets-controller
     app.kubernetes.io/managed-by: kustomize
     app.kubernetes.io/created-by: gitopssets-controller
-  name: ${resourceName}-onboarding-namespaces
-  namespace: ${templateNamespace}
+  name: onboarding-namespaces
+  namespace: flux-apps
 spec:
   serviceAccountName: gitopssets
   generators:
@@ -62,96 +88,77 @@ spec:
         directories:
           - path: resource-descriptions/namespaces/*
   templates:
-    - content:
-        kind: Kustomization
-        apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-        metadata:
-          name: ecr-repo-namespace-{{ trimSuffix ".yaml" .Element.Base }}
-          annotations:
-            templates.weave.works/create-request: ''
-        spec:
-          interval: 10m0s
-          sourceRef:
-            kind: GitRepository
-            name: global-config
-            namespace: flux-system
-          path: ./infra/dynamic/ecr-repo
-          prune: true
-          wait: true
-          timeout: 5m
-          postBuild:
-            substituteFrom:
-              - kind: ConfigMap
-                name: cluster-config
-            substitute:
-              ecrName: 'ns-{{ trimSuffix ".yaml" .Element.Base }}'
-              templateNamespace: ${templateNamespace}
-              resourceName: ${resourceName}
----
-apiVersion: templates.weave.works/v1alpha1
-kind: GitOpsSet
-metadata:
-  labels:
-    app.kubernetes.io/name: gitopsset
-    app.kubernetes.io/instance: gitopsset-sample
-    app.kubernetes.io/part-of: gitopssets-controller
-    app.kubernetes.io/managed-by: kustomize
-    app.kubernetes.io/created-by: gitopssets-controller
-  name: ${resourceName}-onboarding-namespace-apps
-  namespace: ${templateNamespace}
-spec:
-  serviceAccountName: gitopssets
-  generators:
-    - gitRepository:
-        repositoryRef: flux-system
-        directories:
-          - path: resource-descriptions/wge/namespaces/*
-  templates:
-    - content:
-        apiVersion: templates.weave.works/v1alpha1
-        kind: GitOpsSet
-        metadata:
-          annotations:
-            templates.weave.works/delimiters: "((,))"
-          labels:
-            app.kubernetes.io/name: gitopsset
-            app.kubernetes.io/instance: gitopsset-sample
-            app.kubernetes.io/part-of: gitopssets-controller
-            app.kubernetes.io/managed-by: kustomize
-            app.kubernetes.io/created-by: gitopssets-controller
-          name: ${resourceName}-onboarding-ns-{{ trimSuffix ".yaml" .Element.Base }}-apps
-          namespace: ${templateNamespace}
-        spec:
-          serviceAccountName: gitopssets
-          generators:
-            - gitRepository:
-                repositoryRef: flux-system
-                files:
-                  - path: resource-descriptions/wge/namespaces/{{ .Element.Base }}
-          templates:
-            - repeat: '{ .apps }'
-              content:
-                kind: Kustomization
-                apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
-                metadata:
-                  name: ecr-repo-ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))
-                  annotations:
-                    templates.weave.works/create-request: ''
-                spec:
-                  interval: 10m0s
-                  sourceRef:
-                    kind: GitRepository
-                    name: global-config
-                    namespace: flux-system
-                  path: ./infra/dynamic/ecr-repo
-                  prune: true
-                  wait: true
-                  timeout: 5m
-                  postBuild:
-                    substituteFrom:
-                      - kind: ConfigMap
-                        name: cluster-config
-                    substitute:
-                      ecrName: 'ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))'
-                      templateNamespace: ${templateNamespace}
-                      resourceName: ${resourceName}
+    content:
+      apiVersion: templates.weave.works/v1alpha1
+      kind: GitOpsSet
+      metadata:
+        annotations:
+          templates.weave.works/delimiters: "((,))"
+        labels:
+          app.kubernetes.io/name: gitopsset
+          app.kubernetes.io/instance: gitopsset-sample
+          app.kubernetes.io/part-of: gitopssets-controller
+          app.kubernetes.io/managed-by: kustomize
+          app.kubernetes.io/created-by: gitopssets-controller
+        name: flux-appsonboarding-ns-{{ trimSuffix ".yaml" .Element.Base }}-apps
+        namespace: flux-apps
+      spec:
+        serviceAccountName: gitopssets
+        generators:
+          - gitRepository:
+              repositoryRef: clusters
+              files:
+                - path: resource-descriptions/namespaces/{{ .Element.Base }}
+        templates:
+          - repeat: '{ .apps }'
+            content:
+              kind: Kustomization
+              apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+              metadata:
+                name: ecr-repo-ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))-manifest
+                annotations:
+                  templates.weave.works/create-request: ''
+              spec:
+                interval: 10m0s
+                sourceRef:
+                  kind: GitRepository
+                  name: global-config
+                  namespace: flux-system
+                path: ./infra/dynamic/ecr-repo
+                prune: true
+                wait: true
+                timeout: 5m
+                postBuild:
+                  substituteFrom:
+                    - kind: ConfigMap
+                      name: cluster-config
+                  substitute:
+                    ecrName: 'ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))-manifest'
+                    templateNamespace: flux-apps
+                    resourceName: test1
+          - repeat: '{ .apps }'
+            content:
+              kind: Kustomization
+              apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+              metadata:
+                name: ecr-repo-ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))-config
+                annotations:
+                  templates.weave.works/create-request: ''
+              spec:
+                interval: 10m0s
+                sourceRef:
+                  kind: GitRepository
+                  name: global-config
+                  namespace: flux-system
+                path: ./infra/dynamic/ecr-repo
+                prune: true
+                wait: true
+                timeout: 5m
+                postBuild:
+                  substituteFrom:
+                    - kind: ConfigMap
+                      name: cluster-config
+                  substitute:
+                    ecrName: 'ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))-config'
+                    templateNamespace: flux-apps
+                    resourceName: 
