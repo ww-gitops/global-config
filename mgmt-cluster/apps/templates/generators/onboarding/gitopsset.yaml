@@ -20,9 +20,10 @@ spec:
   templates:
     content:
       kind: Kustomization
-      apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+      apiVersion: kustomize.toolkit.fluxcd.io/v1
       metadata:
         name: ecr-repo-cluster-{{ trimSuffix ".yaml" .Element.Base }}
+        namespace: flux-apps
         annotations:
           templates.weave.works/create-request: ''
       spec:
@@ -45,9 +46,10 @@ spec:
             resourceName: test1
 ---
 kind: Kustomization
-apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+apiVersion: kustomize.toolkit.fluxcd.io/v1
 metadata:
-name: ecr-repo-templates
+  name: ecr-repo-templates
+  namespace: flux-apps
 annotations:
   templates.weave.works/create-request: ''
 spec:
