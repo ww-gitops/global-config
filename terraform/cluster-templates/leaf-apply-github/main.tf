@@ -6,7 +6,7 @@ provider "github" {
 resource "github_repository_file" "leaf_config" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
-  file                = format("%s/%s/wge-leaf-config.yaml", var.target_path, var.flux_sync_directory)
+  file                = format("%s/wge-leaf-config.yaml", var.target_path)
   content = templatefile("${path.module}/templates/kustomization.tftpl", {
     name       = "wge-leaf-config"
     namespace  = var.template_namespace
@@ -44,7 +44,7 @@ resource "github_repository_file" "leaf_config" {
 resource "github_repository_file" "leaf-addons" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
-  file                = format("%s/%s/wge-leaf.yaml", var.target_path, var.flux_sync_directory)
+  file                = format("%s/wge-leaf.yaml", var.target_path)
   content = templatefile("${path.module}/templates/kustomization.tftpl", {
     name       = "wge-leaf"
     namespace  = var.template_namespace
@@ -64,7 +64,7 @@ resource "github_repository_file" "leaf-addons" {
 resource "github_repository_file" "leaf-apps" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
-  file                = format("%s/%s/wge-leaf-apps.yaml", var.target_path, var.flux_sync_directory)
+  file                = format("%s/wge-leaf-apps.yaml", var.target_path)
   content = templatefile("${path.module}/templates/kustomization.tftpl", {
     name       = "wge-leaf-apps"
     namespace  = var.template_namespace
