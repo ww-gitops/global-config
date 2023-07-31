@@ -31,7 +31,7 @@ resource "github_repository_file" "leaf_config" {
       awsRegion: ${var.awsRegion}
       awsTagCreator: ${var.awsTagCreator}
       awsTagCustomer: ${var.awsTagCustomer}
-      awsTagProjectGid: ${var.awsTagProjectGid}
+      awsTagProjectGid: "${var.awsTagProjectGid}"
     EOF
   })
   commit_author       = var.git_commit_author
