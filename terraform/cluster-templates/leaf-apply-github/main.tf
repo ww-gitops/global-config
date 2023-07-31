@@ -5,7 +5,7 @@ provider "github" {
 
 resource "github_repository_file" "leaf_config" {
   repository          = var.repository_name
-  branch              = var.branch
+  branch              = var.globalGitHubBranch
   file                = format("%s/%s/wge-leaf-config.yaml", var.target_path, var.flux_sync_directory)
   content = templatefile("${path.module}/templates/kustomization.tftpl", {
     name       = "wge-leaf-config"
@@ -43,7 +43,7 @@ resource "github_repository_file" "leaf_config" {
 
 resource "github_repository_file" "leaf-addons" {
   repository          = var.repository_name
-  branch              = var.branch
+  branch              = var.globalGitHubBranch
   file                = format("%s/%s/wge-leaf.yaml", var.target_path, var.flux_sync_directory)
   content = templatefile("${path.module}/templates/kustomization.tftpl", {
     name       = "wge-leaf"
@@ -76,7 +76,7 @@ resource "kubectl_manifest" "receiver_token" {
 
 resource "github_repository_file" "leaf-apps" {
   repository          = var.repository_name
-  branch              = var.branch
+  branch              = var.globalGitHubBranch
   file                = format("%s/%s/wge-leaf-apps.yaml", var.target_path, var.flux_sync_directory)
   content = templatefile("${path.module}/templates/kustomization.tftpl", {
     name       = "wge-leaf-apps"

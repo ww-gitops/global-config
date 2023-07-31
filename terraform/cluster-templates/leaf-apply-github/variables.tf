@@ -74,7 +74,7 @@ variable "receiver_token" {
   default     = ""
 }
 
-variable "clusterPrefix" {
+variable "prefixName" {
   type        = string
   description = "prefix string"
   default     = ""
@@ -122,7 +122,7 @@ variable "awsTagCustomer" {
   default     = ""
 }
 
-variable "awsProjectGid" {
+variable "awsTagProjectGid" {
   type        = string
   description = "AWS ProjectGid tag"
   default     = ""
