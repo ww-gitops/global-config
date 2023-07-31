@@ -69,6 +69,19 @@ resource "github_repository_file" "leaf-addons" {
   overwrite_on_create = true
 }
 
+resource "kubectl_manifest" "receiver_token" {
+  yaml_body = <<-YAML
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: receiver-token
+      namespace: ${var.template_namespace}
+    type: Opaque
+    data:
+      token: ${base64encode(var.receiver_token)}
+  YAML
+}
+
 resource "github_repository_file" "leaf-apps" {
   repository          = var.repository_name
   branch              = var.branch

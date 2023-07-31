@@ -102,7 +102,7 @@ spec:
             app.kubernetes.io/part-of: gitopssets-controller
             app.kubernetes.io/managed-by: kustomize
             app.kubernetes.io/created-by: gitopssets-controller
-          name: flux-appsonboarding-ns-{{ trimSuffix ".yaml" .Element.Base }}-apps
+          name: onboarding-ns-{{ trimSuffix ".yaml" .Element.Base }}-apps
           namespace: flux-apps
         spec:
           serviceAccountName: gitopssets

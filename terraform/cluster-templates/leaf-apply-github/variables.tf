@@ -79,3 +79,9 @@ variable "cluster_prefix" {
   description = "prefix for cluster name"
   default     = ""
 }
+
+variable "receiver_token" {
+  type        = string
+  description = "token for use by receivers"
+  default     = ""
+}

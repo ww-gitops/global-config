@@ -42,8 +42,10 @@ spec:
         - repository_name
     - kind: Secret
       name: github-leaf-token
+    - kind: Secret
+      name: receiver-token
       varsKeys:
-        - github_token
+        - token:receiver_token
     - kind: ConfigMap
       name: cluster-config
   sourceRef:

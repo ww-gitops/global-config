@@ -40,4 +40,4 @@ spec:
         - --enabled-generators=GitRepository,Cluster,List,APIClient,Matrix
       manager:
         image:
-          tag: v0.13.3
+          tag: v0.14.1

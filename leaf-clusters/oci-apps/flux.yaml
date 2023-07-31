@@ -1,0 +1,45 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: OCIRepository
+metadata:
+  name: ${resourceName}-cluster-apps
+  namespace: ${templateNamespace}
+spec:
+  interval: 10m
+  url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${clusterName}
+  ref:
+    tag: latest
+---
+apiVersion: notification.toolkit.fluxcd.io/v1
+kind: Receiver
+metadata:
+  name: ${resourceName}-cluster-apps
+  namespace: ${templateNamespace}
+  labels:
+    sharding.fluxcd.io/key: $shard
+spec:
+  type: generic
+  secretRef:
+    name: webhook-token
+  resources:
+    - apiVersion: source.toolkit.fluxcd.io/v1
+      kind: OCIRepository
+      name: ${resourceName}-cluster-apps
+      namespace: ${templateNamespace}
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ${resourceName}-cluster-apps
+  namespace: ${templateNamespace}
+spec:
+  prune: true
+  wait: true
+  timeout: 5m
+  sourceRef:
+    kind: OCIRepository
+    name: ${resourceName}-cluster-apps
+  path: ./
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
