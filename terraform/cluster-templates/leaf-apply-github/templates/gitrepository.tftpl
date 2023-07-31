@@ -1,0 +1,15 @@
+#
+# DO NOT EDIT - This file is managed by Terraform
+#
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: ${name}
+  namespace: ${namespace}
+spec:
+  interval: 1m0s
+  ref:
+    branch: ${globalGitHubBranch}
+  timeout: 60s
+  url: https://github.com/${globalGitHubOrg}/${globalGitHubRepo}.git

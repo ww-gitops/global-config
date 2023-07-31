@@ -3,6 +3,23 @@ provider "github" {
   token = var.github_token
 }
 
+resource "github_repository_file" "global_config" {
+  repository          = var.repository_name
+  branch              = var.globalGitHubBranch
+  file                = format("%s/%s/global-config.yaml", var.target_path, var.flux_sync_directory)
+  content = templatefile("${path.module}/templates/gitrepository.tftpl", {
+    name       = "global-config"
+    namespace  = var.template_namespace
+    globalGitHubOrg: ${var.globalGitHubOrg}
+    globalGitHubRepo: ${var.globalGitHubRepo}
+    globalGitHubBranch: ${var.globalGitHubBranch}
+  })
+  commit_author       = var.git_commit_author
+  commit_email        = var.git_commit_email
+  commit_message      = var.git_commit_message
+  overwrite_on_create = true
+}
+
 resource "github_repository_file" "leaf_config" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
