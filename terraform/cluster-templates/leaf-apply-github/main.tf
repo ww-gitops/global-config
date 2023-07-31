@@ -23,7 +23,7 @@ resource "github_repository_file" "leaf_config" {
       commitUser: ${var.git_commit_author}
       resourceName: ${var.resource_name}
       templateNamespace: ${var.template_namespace}
-      clusterPrefix: ${var.cluster_prefix}
+      clusterPrefix: ${var.clusterPrefix}
       globalGitHubOrg: ${var.globalGitHubOrg}
       globalGitHubRepo: ${var.globalGitHubRepo}
       globalGitHubBranch: ${var.globalGitHubBranch}
