@@ -27,12 +27,12 @@ resource "github_repository_file" "leaf_config" {
       globalGitHubOrg: ${var.globalGitHubOrg}
       globalGitHubRepo: ${var.globalGitHubRepo}
       globalGitHubBranch: ${var.globalGitHubBranch}
-      awsAccountId: "${awsAccountId}"
-      prefixName: ${prefixName}
-      awsRegion: ${awsRegion}
-      awsTagCreator: ${awsTagCreator}
-      awsTagCustomer: ${awsTagCustomer}
-      awsTagProjectGid: ${awsTagProjectGid}
+      awsAccountId: "${var.awsAccountId}"
+      prefixName: ${var.prefixName}
+      awsRegion: ${var.awsRegion}
+      awsTagCreator: ${var.awsTagCreator}
+      awsTagCustomer: ${var.awsTagCustomer}
+      awsTagProjectGid: ${var.awsTagProjectGid}
     EOF
   })
   commit_author       = var.git_commit_author
