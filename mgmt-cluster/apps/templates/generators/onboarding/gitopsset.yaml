@@ -50,8 +50,8 @@ apiVersion: kustomize.toolkit.fluxcd.io/v1
 metadata:
   name: ecr-repo-templates
   namespace: flux-apps
-annotations:
-  templates.weave.works/create-request: ''
+  annotations:
+    templates.weave.works/create-request: ''
 spec:
   interval: 10m0s
   sourceRef:
@@ -118,6 +118,7 @@ spec:
               apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
               metadata:
                 name: ecr-repo-ns-{{ trimSuffix ".yaml" .Element.Base }}-app-(( .Repeat.name ))-manifest
+                namespace: flux-apps
                 annotations:
                   templates.weave.works/create-request: ''
               spec:
