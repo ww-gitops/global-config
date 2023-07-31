@@ -68,12 +68,6 @@ variable "template_namespace" {
   default     = ""
 }
 
-variable "receiver_token" {
-  type        = string
-  description = "token for use by receivers"
-  default     = ""
-}
-
 variable "prefixName" {
   type        = string
   description = "prefix string"

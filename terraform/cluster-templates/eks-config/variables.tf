@@ -158,3 +158,9 @@ variable "template_namespace" {
   description = "template namespace"
   default     = ""
 }
+
+variable "receiver_token" {
+  type        = string
+  description = "token for use by receivers"
+  default     = ""
+}

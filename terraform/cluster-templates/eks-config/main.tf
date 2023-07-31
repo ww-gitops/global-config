@@ -128,3 +128,16 @@ resource "aws_autoscaling_schedule" "set-scale-to-zero-ng-worker" {
   recurrence             = "*/5 * * * *"
   autoscaling_group_name = module.worker_node_group.node_group.resources[0].autoscaling_groups[0].name
 }
+
+resource "kubectl_manifest" "receiver_token" {
+  yaml_body = <<-YAML
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: receiver-token
+      namespace: ${var.template_namespace}
+    type: Opaque
+    data:
+      token: ${base64encode(var.receiver_token)}
+  YAML
+}

@@ -69,6 +69,10 @@ spec:
       varsKeys:
         - github_token
     - kind: Secret
+      name: receiver-token
+      varsKeys:
+        - token:receiver_token
+    - kind: Secret
       name: vault-token
     - kind: ConfigMap
       name: cluster-config
