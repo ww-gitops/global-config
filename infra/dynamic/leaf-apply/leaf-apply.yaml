@@ -48,6 +48,17 @@ spec:
         - token:receiver_token
     - kind: ConfigMap
       name: cluster-config
+      varsKeys:
+        - clusterPrefix
+        - globalGitHubOrg
+        - globalGitHubRepo
+        - globalGitHubBranch
+        - awsAccountId
+        - prefixName
+        - awsRegion
+        - awsTagCreator
+        - awsTagCustomer
+        - awsTagProjectGid
   sourceRef:
     kind: GitRepository
     name: global-config

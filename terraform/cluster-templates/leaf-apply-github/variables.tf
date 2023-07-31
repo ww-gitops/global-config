@@ -27,12 +27,6 @@ variable "repository_visibility" {
   default     = "private"
 }
 
-variable "branch" {
-  type        = string
-  description = "branch name"
-  default     = "main"
-}
-
 variable "target_path" {
   type        = string
   description = "flux sync target path"
@@ -74,14 +68,63 @@ variable "template_namespace" {
   default     = ""
 }
 
-variable "cluster_prefix" {
-  type        = string
-  description = "prefix for cluster name"
-  default     = ""
-}
-
 variable "receiver_token" {
   type        = string
   description = "token for use by receivers"
   default     = ""
 }
+
+variable "clusterPrefix" {
+  type        = string
+  description = "prefix string"
+  default     = ""
+}
+
+variable "globalGitHubOrg" {
+  type        = string
+  description = "global config GitHub organziation"
+  default     = ""
+}
+
+variable "globalGitHubRepo" {
+  type        = string
+  description = "global config GitHub repository"
+  default     = ""
+}
+
+variable "globalGitHubBranch" {
+  type        = string
+  description = "global config GitHub repository branch"
+  default     = ""
+}
+
+variable "awsAccountId" {
+  type        = string
+  description = "AWS account id"
+  default     = ""
+}
+
+variable "awsRegion" {
+  type        = string
+  description = "AWS region"
+  default     = ""
+}
+
+variable "awsTagCreator" {
+  type        = string
+  description = "AWS creator tag"
+  default     = ""
+}
+
+variable "awsTagCustomer" {
+  type        = string
+  description = "AWS customer tag"
+  default     = ""
+}
+
+variable "awsProjectGid" {
+  type        = string
+  description = "AWS ProjectGid tag"
+  default     = ""
+}
+
