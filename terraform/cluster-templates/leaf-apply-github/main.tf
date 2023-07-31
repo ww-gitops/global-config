@@ -6,7 +6,7 @@ provider "github" {
 resource "github_repository_file" "leaf_config" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
-  file                = format("%s/wge-leaf-config.yaml", var.target_path, var.flux_sync_directory)
+  file                = format("%s/%s/wge-leaf-config.yaml", var.target_path, var.flux_sync_directory)
   content = templatefile("${path.module}/templates/kustomization.tftpl", {
     name       = "wge-leaf-config"
     namespace  = var.template_namespace
