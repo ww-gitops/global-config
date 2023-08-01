@@ -5,7 +5,7 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   interval: 10m
-  url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/${clusterName}
+  url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/clusters-${clusterName}
   ref:
     tag: latest
 ---
