@@ -14,8 +14,8 @@ kind: Receiver
 metadata:
   name: ${resourceName}-cluster-apps
   namespace: ${templateNamespace}
-  labels:
-    sharding.fluxcd.io/key: $shard
+  # labels:
+  #   sharding.fluxcd.io/key: $shard
 spec:
   type: generic
   secretRef:
