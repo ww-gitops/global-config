@@ -4,7 +4,7 @@ provider "github" {
 }
 
 locals {
-  gid = format("\"%s\"", var.awsTagProjectGid)
+  gid = format("\\"%s\\"", var.awsTagProjectGid)
   awsAccount = format("\\"%s\\"", var.awsAccountId)
 }
 
