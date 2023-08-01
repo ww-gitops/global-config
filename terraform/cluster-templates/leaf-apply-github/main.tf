@@ -3,6 +3,11 @@ provider "github" {
   token = var.github_token
 }
 
+locals {
+  gid = format("\"%s\"", var.awsTagProjectGid)
+  awsAccount = format("\"%s\"", var.awsAccountId)
+}
+
 resource "github_repository_file" "global_config" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
@@ -44,11 +49,11 @@ resource "github_repository_file" "leaf_config" {
       globalGitHubOrg: ${var.globalGitHubOrg}
       globalGitHubRepo: ${var.globalGitHubRepo}
       globalGitHubBranch: ${var.globalGitHubBranch}
-      awsAccountId: format("\"%s\"", var.awsAccountId)
+      awsAccountId: ${local.awsAccount}
       awsRegion: ${var.awsRegion}
       awsTagCreator: ${var.awsTagCreator}
       awsTagCustomer: ${var.awsTagCustomer}
-      awsTagProjectGid: format("\"%s\"", var.awsTagProjectGid)
+      awsTagProjectGid: ${local.gid}
     EOF
   })
   commit_author       = var.git_commit_author
