@@ -5,7 +5,7 @@ provider "github" {
 
 locals {
   gid = format("\"%s\"", var.awsTagProjectGid)
-  awsAccount = format("\"%s\"", var.awsAccountId)
+  awsAccount = format("\\"%s\\"", var.awsAccountId)
 }
 
 resource "github_repository_file" "global_config" {
