@@ -11,7 +11,7 @@ locals {
 resource "github_repository_file" "system_global_config" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
-  file                = format("%s/%s/global-config.yaml", var.target_path, var.flux_sync_directory)
+  file                = format("%s/%s/flux-system-global-config.yaml", var.target_path, var.flux_sync_directory)
   content = templatefile("${path.module}/templates/gitrepository.tftpl", {
     name       = "global-config"
     namespace  = "flux-system"
@@ -28,7 +28,7 @@ resource "github_repository_file" "system_global_config" {
 resource "github_repository_file" "global_config" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
-  file                = format("%s/%s/global-config.yaml", var.target_path, var.flux_sync_directory)
+  file                = format("%s/%s/%s-global-config.yaml", var.target_path, var.flux_sync_directory, var.template_namespace)
   content = templatefile("${path.module}/templates/gitrepository.tftpl", {
     name       = "global-config"
     namespace  = var.template_namespace
