@@ -44,11 +44,11 @@ resource "github_repository_file" "leaf_config" {
       globalGitHubOrg: ${var.globalGitHubOrg}
       globalGitHubRepo: ${var.globalGitHubRepo}
       globalGitHubBranch: ${var.globalGitHubBranch}
-      awsAccountId: "${var.awsAccountId}"
+      awsAccountId: format("\"%s\"", var.awsAccountId)
       awsRegion: ${var.awsRegion}
       awsTagCreator: ${var.awsTagCreator}
       awsTagCustomer: ${var.awsTagCustomer}
-      awsTagProjectGid: "${var.awsTagProjectGid}"
+      awsTagProjectGid: format("\"%s\"", var.awsTagProjectGid)
     EOF
   })
   commit_author       = var.git_commit_author
