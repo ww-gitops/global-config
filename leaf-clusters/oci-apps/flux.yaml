@@ -35,6 +35,7 @@ spec:
   prune: true
   wait: true
   timeout: 5m
+  interval: 5m
   sourceRef:
     kind: OCIRepository
     name: ${resourceName}-cluster-apps
