@@ -8,7 +8,7 @@ locals {
   awsAccount = format("'\"%s\"'", var.awsAccountId)
 }
 
-resource "github_repository_file" "global_config" {
+resource "github_repository_file" "system_global_config" {
   repository          = var.repository_name
   branch              = var.globalGitHubBranch
   file                = format("%s/%s/global-config.yaml", var.target_path, var.flux_sync_directory)
