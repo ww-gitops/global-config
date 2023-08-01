@@ -37,7 +37,3 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config
-    substitute:
-      resourceName: test
-      templateNamespace: wge
-      clusterName: kind-u2-k1
