@@ -141,3 +141,15 @@ resource "kubectl_manifest" "receiver_token" {
       token: ${base64encode(var.receiver_token)}
   YAML
 }
+
+
+module "aws_ecr_roles" {
+  source                    = "../../modules/aws-ecr-roles"
+  cluster_name              = var.cluster_name
+  cluster_oidc_provider_arn = data.aws_iam_openid_connect_provider.this.arn
+  cluster_oidc_provider_url = data.aws_iam_openid_connect_provider.this.url
+  awsRegion = var.awsRegion
+  awsAccountId = data.aws_caller_identity.current.account_id
+  # service_account = "ecr-read"
+  # namespace = var.template_namespace
+}
