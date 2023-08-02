@@ -71,3 +71,9 @@ variable "commit_email" {
   description = "git commit email"
   default     = null
 }
+
+variable "ecr_role" {
+  type        = string
+  description = "role to use to access ecr"
+  default     = ""
+}

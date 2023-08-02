@@ -94,6 +94,17 @@ module "leaf_config" {
   template_namespace     = var.template_namespace
 }
 
+module "aws_ecr_roles" {
+  source                    = "../../modules/aws-ecr-roles"
+  cluster_name              = var.cluster_name
+  cluster_oidc_provider_arn = data.aws_iam_openid_connect_provider.this.arn
+  cluster_oidc_provider_url = data.aws_iam_openid_connect_provider.this.url
+  awsRegion = var.region
+  awsAccountId = data.aws_caller_identity.current.account_id
+  # service_account = "ecr-read"
+  # namespace = var.template_namespace
+}
+
 module "flux_bootstrap" {
   source                  = "../../modules/flux-bootstrap"
   aws_region              = var.region
@@ -105,6 +116,7 @@ module "flux_bootstrap" {
   commit_author           = var.git_commit_author
   commit_email            = var.git_commit_email
   use_existing_repository = true
+  ecr_role = module.aws_ecr_roles.role_arn
 }
 
 data "aws_caller_identity" "current" {}
@@ -140,16 +152,4 @@ resource "kubectl_manifest" "receiver_token" {
     data:
       token: ${base64encode(var.receiver_token)}
   YAML
-}
-
-
-module "aws_ecr_roles" {
-  source                    = "../../modules/aws-ecr-roles"
-  cluster_name              = var.cluster_name
-  cluster_oidc_provider_arn = data.aws_iam_openid_connect_provider.this.arn
-  cluster_oidc_provider_url = data.aws_iam_openid_connect_provider.this.url
-  awsRegion = var.region
-  awsAccountId = data.aws_caller_identity.current.account_id
-  # service_account = "ecr-read"
-  # namespace = var.template_namespace
 }

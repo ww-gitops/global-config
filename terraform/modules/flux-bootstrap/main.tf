@@ -105,10 +105,13 @@ resource "github_branch_default" "main" {
 
 locals {
   github_repository = var.use_existing_repository == true ? data.github_repository.main[0] : github_repository.main[0]
+  patch = templatefile("${path.module}/templates/patch.tftpl", {
+    role_arn = var.ecr_role
+  })
   patched_kustomize_content = format("%s\n", trimspace(
     <<-EOT
     ${trimspace(data.flux_sync.main.kustomize_content)}
-    ${trimspace(var.kustomization_patches)}
+    ${trimspace(local.patch)}
     EOT
   ))
 }

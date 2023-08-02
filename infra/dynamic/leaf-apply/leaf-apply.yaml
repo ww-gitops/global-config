@@ -40,6 +40,8 @@ spec:
         - repository_name
     - kind: Secret
       name: github-leaf-token
+    - kind: Secret
+      name: ${resourceName}-${clusterName}-cluster-config
     - kind: ConfigMap
       name: cluster-config
       varsKeys:
