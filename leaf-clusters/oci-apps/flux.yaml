@@ -4,6 +4,7 @@ metadata:
   name: ${resourceName}-cluster-apps
   namespace: ${templateNamespace}
 spec:
+  provider: aws
   interval: 10m
   url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/clusters-${clusterName}
   ref:
