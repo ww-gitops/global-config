@@ -5,6 +5,8 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   interval: 10m
+  ref:
+    branch: main
   url: https://github.com/${GitHubOrg}/clusters.git
 ---
 apiVersion: source.toolkit.fluxcd.io/v1beta2
