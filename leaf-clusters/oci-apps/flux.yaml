@@ -16,6 +16,8 @@ spec:
   provider: aws
   interval: 10m
   url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/cluster-${clusterName}
+  ref:
+    tag: v0.0.1
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver
