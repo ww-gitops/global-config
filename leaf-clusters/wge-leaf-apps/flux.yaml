@@ -26,6 +26,7 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   interval: 10m0s
+  timeout: 2m
   path: ./leaf-clusters/oci-src
   prune: true
   wait: true
@@ -45,6 +46,7 @@ metadata:
   namespace: ${templateNamespace}
 spec:
   interval: 10m0s
+  timeout: 2m
   path: ./leaf-clusters/oci-apps
   prune: true
   wait: true
