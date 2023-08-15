@@ -15,7 +15,7 @@ metadata:
 spec:
   provider: aws
   interval: 10m
-  url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/clusters-${clusterName}
+  url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/cluster-${clusterName}
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver
