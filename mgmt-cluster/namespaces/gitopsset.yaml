@@ -76,7 +76,7 @@ spec:
           interval: 10m0s
           sourceRef:
             kind: GitRepository
-            name: global-config
+            name: flux-system
             namespace: flux-system
           path: ./mgmt-cluster/templates
           prune: true
