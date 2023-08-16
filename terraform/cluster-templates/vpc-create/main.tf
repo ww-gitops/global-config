@@ -35,7 +35,6 @@ resource "aws_s3_bucket_lifecycle_configuration" "expire_old_logs" {
   rule {
     id      = "expire-old-logs"
     status  = "Enabled"
-    prefix  = "
 
     transition {
       days          = 30
