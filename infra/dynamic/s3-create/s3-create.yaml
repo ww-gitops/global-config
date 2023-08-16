@@ -22,7 +22,7 @@ spec:
       }
   vars:
     - name: bucket_name
-      value: ${resourceName}-${clusterName}-image-versions
+      value: ${resourceName}-${bucketName}-image-versions
     - name: region
       value: ${awsRegion}
   sourceRef:

@@ -262,18 +262,18 @@ spec:
                   kind: Kustomization
                   apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
                   metadata:
-                    name: '(( .params.RESOURCE_NAME ))-eks-config-{{ .Repeat.name }}'
+                    name: '(( .params.RESOURCE_NAME ))-s3-image-versions-{{ .Repeat.name }}'
                     annotations:
                       templates.weave.works/create-request: ''
                   spec:
                     interval: 10m0s
                     dependsOn:
-                      - name: '(( .params.RESOURCE_NAME ))-eks-{{ .Repeat.name }}'
+                      - name: '(( .params.RESOURCE_NAME ))-s3-image-versions-{{ .Repeat.name }}'
                     sourceRef:
                       kind: GitRepository
                       name: global-config
                       namespace: flux-system
-                    path: ./infra/dynamic/eks-config
+                    path: ./infra/dynamic/s3-create
                     prune: true
                     wait: true
                     timeout: 5m
@@ -284,7 +284,7 @@ spec:
                           name: cluster-config
                       substitute:
                         resourceName: '(( .params.RESOURCE_NAME ))'
-                        clusterName: '{{ .Repeat.name }}'
+                        bucketName: '{{ .Repeat.name }}'
                         templateNamespace: '(( .template.meta.namespace ))'
 
         # Configure eks cluster if create is true
