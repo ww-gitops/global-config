@@ -68,6 +68,7 @@ resource "aws_iam_role" "vpc_flow_logs" {
     Statement = [
       {
         Effect = "Allow"
+        Sid: ""
         Principal = {
           Service = "vpc.amazonaws.com"
         }
