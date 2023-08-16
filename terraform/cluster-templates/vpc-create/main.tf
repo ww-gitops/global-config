@@ -16,12 +16,17 @@ module "vpc" {
   private_subnet_count = var.private_subnet_count
 }
 
+data "aws_caller_identity" "current" {}
+locals {
+  bucket_name = format("%s-%s-%s-%s", var.prefix_name, data.aws_caller_identity.current.account_id, var.region, var.bucket_name)
+}
+
 resource "aws_cloudwatch_log_group" "vpc" {
   name = var.vpc_name
 }
 
 resource "aws_s3_bucket" "vpc_flow_logs" {
-  bucket = var.vpc_name
+  bucket = local.bucket_name
   acl    = "private"
 
   versioning {
@@ -56,7 +61,7 @@ resource "aws_flow_log" "vpc_flow_logs" {
 }
 
 resource "aws_iam_role" "vpc_flow_logs" {
-  name = "vpc_flow_logs"
+  name = "${local.bucket_name}"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"

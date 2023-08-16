@@ -20,6 +20,11 @@ variable "vpc_name" {
   description = "the vpc cluster name for subnet tagging"
 }
 
+variable "prefix_name" {
+  type        = string
+  description = "the prefix id"
+}
+
 variable "vpc_cidr" {
   type        = string
   description = "vpc cidr range"

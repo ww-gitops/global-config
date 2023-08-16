@@ -25,6 +25,8 @@ spec:
       value: ${resourceName}-${bucketName}-image-versions
     - name: region
       value: ${awsRegion}
+    - name: prefix_name
+      value: ${prefixName}
   sourceRef:
     kind: GitRepository
     name: global-config
