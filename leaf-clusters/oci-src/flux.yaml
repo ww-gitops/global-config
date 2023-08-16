@@ -48,7 +48,7 @@ spec:
   interval: 10m
   url: oci://${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/templates
   ref:
-    tag: v0.0.1
+    tag: v0.0.2
 ---
 apiVersion: notification.toolkit.fluxcd.io/v1
 kind: Receiver
