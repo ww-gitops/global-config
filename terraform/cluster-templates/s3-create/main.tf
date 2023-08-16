@@ -1,9 +1,10 @@
-
 provider "aws" {
   region = var.region
 
   default_tags {
-    tags = merge(var.default_tags, var.tags)
+    tags = merge({
+      source = "Terraform Managed"
+    }, var.tags)
   }
 }
 
