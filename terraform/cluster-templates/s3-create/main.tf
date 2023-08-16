@@ -17,7 +17,7 @@ resource "aws_s3_bucket_versioning" "s3_versioning" {
   versioning_configuration {
     status = "Enabled"
   }
-  bucket = aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.image_versions.id
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "s3_encrypt" {
@@ -26,16 +26,16 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "s3_encrypt" {
       sse_algorithm = "AES256"
     }
   }
-  bucket = aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.image_versions.id
 }
 
 resource "aws_s3_bucket_acl" "private_bucket" {
-  bucket = aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.image_versions.id
   acl    = "private"
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_public_access" {
-  bucket = aws_s3_bucket.terraform_state.id
+  bucket = aws_s3_bucket.image_versions.id
 
   block_public_acls       = true
   block_public_policy     = true
