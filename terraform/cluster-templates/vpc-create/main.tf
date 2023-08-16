@@ -18,7 +18,7 @@ module "vpc" {
 
 data "aws_caller_identity" "current" {}
 locals {
-  bucket_name = format("%s-%s-%s-%s", var.prefix_name, data.aws_caller_identity.current.account_id, var.region, var.bucket_name)
+  bucket_name = format("%s-%s-%s-%s", var.prefix_name, data.aws_caller_identity.current.account_id, var.region, var.vpc_name)
 }
 
 resource "aws_cloudwatch_log_group" "vpc" {
