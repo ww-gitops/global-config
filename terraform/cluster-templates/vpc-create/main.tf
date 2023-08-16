@@ -31,15 +31,13 @@ resource "aws_s3_bucket" "vpc_flow_logs" {
 
 resource "aws_s3_bucket_lifecycle_configuration" "expire_old_logs" {
   bucket = aws_s3_bucket.vpc_flow_logs.id
-  prevent_destroy = true
 
   rule {
     id      = "expire-old-logs"
     status  = "Enabled"
-    prefix  = ""
-    enabled = true
+    prefix  = "
 
-    transitions {
+    transition {
       days          = 30
       storage_class = "GLACIER"
     }
