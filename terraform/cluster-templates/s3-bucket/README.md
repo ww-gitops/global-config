@@ -1,1 +1,1 @@
-# Terraform Resources to create Terraform State bucket
+# Terraform Resources to create AWS s3 bucket

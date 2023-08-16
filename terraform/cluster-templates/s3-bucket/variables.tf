@@ -2,23 +2,18 @@ variable "region" {
   type = string
 }
 
-variable "default_tags" {
-  type = map(string)
-  default = {
-    "Managed by Terraform" = "True"
-    "source" = "Managed by Terraform"
-  }
-}
-
 variable "tags" {
-  type = map(string)
-  default = null
+  type        = map(string)
+  description = "tags for aws resources"
+
+  default     = {
+    customer   = "weaveworks-cx"
+    projectGid = "99999"
+    creator    = "paul-carlton@weave.works"
+  }
 }
 
 variable "bucket_name" {
   type = string
 }
 
-variable "prefix_name" {
-  type = string
-}

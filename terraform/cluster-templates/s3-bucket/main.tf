@@ -8,7 +8,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "image_versions" {
-  bucket = local.bucket_name
+  bucket = var.bucket_name
   force_destroy = true
 }
 
@@ -40,16 +40,4 @@ resource "aws_s3_bucket_public_access_block" "s3_public_access" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
-}
-
-resource "aws_dynamodb_table" "tf-state-lock" {
-  name           = format("%s-%s-%s-%s", var.prefix_name, data.aws_caller_identity.current.account_id, var.region, var.bucket_name)
-  read_capacity  = 5
-  write_capacity = 5
-  hash_key       = "LockID"
-
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
 }
