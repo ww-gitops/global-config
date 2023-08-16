@@ -27,27 +27,29 @@ resource "aws_s3_bucket" "vpc_flow_logs" {
   versioning {
     enabled = true
   }
+}
 
-  lifecycle {
-    prevent_destroy = true
+resource "aws_s3_bucket_lifecycle_configuration" "expire_old_logs" {
+  bucket = aws_s3_bucket.vpc_flow_logs.id
+  prevent_destroy = true
 
-    rule {
-      id      = "expire-old-logs"
-      status  = "Enabled"
-      prefix  = ""
-      enabled = true
+  rule {
+    id      = "expire-old-logs"
+    status  = "Enabled"
+    prefix  = ""
+    enabled = true
 
-      transitions {
-        days          = 30
-        storage_class = "GLACIER"
-      }
+    transitions {
+      days          = 30
+      storage_class = "GLACIER"
+    }
 
-      expiration {
-        days = 365
-      }
+    expiration {
+      days = 365
     }
   }
 }
+
 
 resource "aws_flow_log" "vpc_flow_logs" {
   iam_role_arn    = aws_iam_role.vpc_flow_logs.arn
