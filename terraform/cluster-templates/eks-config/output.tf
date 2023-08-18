@@ -10,9 +10,9 @@ output "secret_name" {
 }
 
 output "cluster_oidc_provider_arn" {
-  data.aws_iam_openid_connect_provider.this.arn
+  value = data.aws_iam_openid_connect_provider.this.arn
 }
 
 output "cluster_oidc_provider_url" {
-  data.aws_iam_openid_connect_provider.this.url
+  value = data.aws_iam_openid_connect_provider.this.url
 }
