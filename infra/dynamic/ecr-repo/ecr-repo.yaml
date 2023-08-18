@@ -33,7 +33,7 @@ spec:
     - kind: ConfigMap
       name: cluster-config
       varsKeys:
-        - region:awsRegion
+        - awsRegion
     - kind: Secret
       name: ${clusterName}-cluster-config
       varsKeys:
