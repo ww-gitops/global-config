@@ -39,6 +39,7 @@ spec:
       varsKeys:
         - cluster_oidc_provider_arn
         - cluster_oidc_provider_url
+        - ecr_role
   sourceRef:
     kind: GitRepository
     name: global-config
