@@ -1,24 +1,3 @@
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: ${resourceName}-apps
-#   namespace: ${templateNamespace}
-# spec:
-#   interval: 10m0s
-#   path: ./leaf-clusters/apps/templates/generator/cluster-apps
-#   prune: true
-#   wait: true
-#   sourceRef:
-#     kind: GitRepository
-#     name: global-config
-#     namespace: flux-system
-#   postBuild:
-#     substituteFrom:
-#       - kind: ConfigMap
-#         name: cluster-config
-#     substitute:
-#       target: namespace
-# ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
@@ -38,25 +17,25 @@ spec:
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config
----
-apiVersion: kustomize.toolkit.fluxcd.io/v1
-kind: Kustomization
-metadata:
-  name: ${resourceName}-oci-apps
-  namespace: ${templateNamespace}
-spec:
-  interval: 10m0s
-  timeout: 2m
-  path: ./leaf-clusters/oci-apps
-  prune: true
-  wait: true
-  dependsOn:
-    - name: ${resourceName}-oci-src
-  sourceRef:
-    kind: GitRepository
-    name: global-config
-    namespace: flux-system
-  postBuild:
-    substituteFrom:
-      - kind: ConfigMap
-        name: cluster-config
+# ---
+# apiVersion: kustomize.toolkit.fluxcd.io/v1
+# kind: Kustomization
+# metadata:
+#   name: ${resourceName}-oci-apps
+#   namespace: ${templateNamespace}
+# spec:
+#   interval: 10m0s
+#   timeout: 2m
+#   path: ./leaf-clusters/oci-apps
+#   prune: true
+#   wait: true
+#   dependsOn:
+#     - name: ${resourceName}-oci-src
+#   sourceRef:
+#     kind: GitRepository
+#     name: global-config
+#     namespace: flux-system
+#   postBuild:
+#     substituteFrom:
+#       - kind: ConfigMap
+#         name: cluster-config
