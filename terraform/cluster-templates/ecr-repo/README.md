@@ -4,6 +4,8 @@ This Terraform template will..
 
 - Create ECR repository
 
+keep this, for use if we want a role per repo
+
 module "aws_ecr_roles" {
   source                    = "../../modules/aws-ecr-roles"
   cluster_name              = var.cluster_name
