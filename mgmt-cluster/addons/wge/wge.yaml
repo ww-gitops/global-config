@@ -122,7 +122,8 @@ spec:
           - --enabled-generators=GitRepository,Cluster,List,APIClient,Matrix
         manager:
           image:
-            tag: v0.15.0
+            repository: bigkevmcd/gitopssets-controller
+            tag: 178bc77
   postRenderers:
     - kustomize:
         patches:
