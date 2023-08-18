@@ -8,3 +8,22 @@ spec:
   ref:
     branch: main
   url: https://github.com/${GitHubOrg}/clusters.git
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ${resourceName}-cluster-image-versions
+  namespace: ${templateNamespace}
+spec:
+  prune: true
+  wait: true
+  timeout: 5m
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: ${resourceName}-cluster-apps
+  path: ./
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config

@@ -1,6 +1,3 @@
-output "image-verisons" {
-  value = {
-    "bucket"       = aws_s3_bucket.image_versions.id
-  }
+output "image-verisons_bucket" {
+  value =  aws_s3_bucket.image_versions.id
 }
-

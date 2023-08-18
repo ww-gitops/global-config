@@ -9,7 +9,10 @@ output "secret_name" {
   value       = module.leaf_config.secret_name
 }
 
-output "ecr_role" {
-  description = "ecr role arn"
-  value       = module.aws_ecr_roles.role_arn
+output "cluster_oidc_provider_arn" {
+  data.aws_iam_openid_connect_provider.this.arn
+}
+
+output "cluster_oidc_provider_url" {
+  data.aws_iam_openid_connect_provider.this.url
 }

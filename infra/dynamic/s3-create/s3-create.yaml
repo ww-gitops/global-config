@@ -1,7 +1,7 @@
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: 's3-${resourceName}-${bucketName}-image-versions'
+  name: 's3-${bucketName}-image-versions'
   namespace: ${templateNamespace}
 spec:
   interval: 10m
@@ -10,7 +10,7 @@ spec:
   approvePlan: auto
   destroyResourcesOnDeletion: true
   writeOutputsToSecret:
-    name: '${resourceName}-${bucketName}-image-versions-bucket'
+    name: '${bucketName}-image-versions-bucket'
   backendConfig:
     customConfiguration: |
       backend "s3" {
@@ -22,11 +22,23 @@ spec:
       }
   vars:
     - name: bucket_name
-      value: ${resourceName}-${bucketName}-image-versions
-    - name: region
-      value: ${awsRegion}
-    - name: prefix_name
-      value: ${prefixName}
+      value: ${bucketName}
+    - name: cluster_name
+      value: ${clusterName}
+    - name: sa_namespace
+      value: ${templateNamespace}
+    - name: service_account
+      value: s3-image-versions
+  varsFrom:
+    - kind: ConfigMap
+      name: cluster-config
+      varsKeys:
+        - region:awsRegion
+    - kind: Secret
+      name: ${resourceName}-${clusterName}-cluster-config
+      varsKeys:
+        - cluster_oidc_provider_arn
+        - cluster_oidc_provider_url
   sourceRef:
     kind: GitRepository
     name: global-config
