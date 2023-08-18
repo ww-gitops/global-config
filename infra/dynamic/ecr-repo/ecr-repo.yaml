@@ -35,7 +35,7 @@ spec:
       varsKeys:
         - region:awsRegion
     - kind: Secret
-      name: ${resourceName}-${clusterName}-cluster-config
+      name: ${clusterName}-cluster-config
       varsKeys:
         - cluster_oidc_provider_arn
         - cluster_oidc_provider_url
