@@ -25,21 +25,11 @@ spec:
       value: ${ecrName}
     - name: cluster_name
       value: ${clusterName}
-    - name: sa_namespace
-      value: flux-system
-    - name: service_account
-      value: source-controller
   varsFrom:
     - kind: ConfigMap
       name: cluster-config
       varsKeys:
         - awsRegion
-    - kind: Secret
-      name: ${clusterName}-cluster-config
-      varsKeys:
-        - cluster_oidc_provider_arn
-        - cluster_oidc_provider_url
-        - ecr_role
   sourceRef:
     kind: GitRepository
     name: global-config

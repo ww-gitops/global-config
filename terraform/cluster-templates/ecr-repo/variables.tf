@@ -30,28 +30,3 @@ variable "awsRegion" {
   default     = ""
 }
 
-variable "cluster_oidc_provider_url" {
-  type        = string
-  description = "url for cluster oidc provider"
-}
-
-variable "cluster_oidc_provider_arn" {
-  type        = string
-  description = "arn for cluster oidc provider"
-}
-
-variable "service_account" {
-  type        = string
-  description = "kubernetes service account"
-}
-
-variable "sa_namespace" {
-  type        = string
-  description = "namespace for kubernetes service account"
-}
-
-variable "ecr_role" {
-  type        = string
-  description = "ecr_role created by eks config and assigned to source controller service account"
-  default = ""
-}
