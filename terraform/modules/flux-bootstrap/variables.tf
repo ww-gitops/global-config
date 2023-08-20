@@ -72,8 +72,8 @@ variable "commit_email" {
   default     = null
 }
 
-variable "ecr_role" {
+variable "role" {
   type        = string
-  description = "role to use to access ecr"
+  description = "role to use for source controller"
   default     = ""
 }

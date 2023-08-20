@@ -115,7 +115,7 @@ module "flux_bootstrap" {
   commit_author           = var.git_commit_author
   commit_email            = var.git_commit_email
   use_existing_repository = true
-  ecr_role = module.aws_ecr_roles.role_arn
+  role = module.aws_s3_roles.role_arn
 }
 
 data "aws_caller_identity" "current" {}
