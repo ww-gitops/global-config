@@ -94,15 +94,14 @@ module "leaf_config" {
   template_namespace     = var.template_namespace
 }
 
-module "aws_ecr_roles" {
-  source                    = "../../modules/aws-ecr-roles"
+module "aws_s3_roles" {
+  source                    = "../../modules/aws-s3-roles"
   cluster_name              = var.cluster_name
+  bucket_name               = format("cluster-%s-image-versions", var.cluster_name)
   cluster_oidc_provider_arn = data.aws_iam_openid_connect_provider.this.arn
   cluster_oidc_provider_url = data.aws_iam_openid_connect_provider.this.url
   awsRegion = var.region
   awsAccountId = data.aws_caller_identity.current.account_id
-  # service_account = "ecr-read"
-  # namespace = var.template_namespace
 }
 
 module "flux_bootstrap" {
