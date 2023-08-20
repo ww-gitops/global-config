@@ -46,8 +46,8 @@ data "aws_iam_policy_document" "s3_read" {
 }
 
 resource "aws_iam_policy" "s3_read" {
-  name   = "${var.cluster_name}-ecr-read"
-  policy = data.aws_iam_policy_document.ecr_read.json
+  name   = "${var.cluster_name}-s3-read"
+  policy = data.aws_iam_policy_document.s3_read.json
 }
 
 
