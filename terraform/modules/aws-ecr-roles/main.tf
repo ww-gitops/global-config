@@ -1,3 +1,9 @@
+resource "kubernetes_service_account_v1" "ecr" {
+  metadata {
+    name      = var.service_account
+    namespace = var.sa_namespace
+  }
+}
 
 data "aws_iam_policy_document" "ecr_read_assume_role" {
   statement {
