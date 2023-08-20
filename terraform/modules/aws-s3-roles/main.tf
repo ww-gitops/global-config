@@ -1,11 +1,3 @@
-
-resource "kubernetes_service_account_v1" "sa" {
-  metadata {
-    name      = var.service_account
-    namespace = var.namespace
-  }
-}
-
 data "aws_iam_policy_document" "s3_read_assume_role" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -39,8 +31,8 @@ data "aws_iam_policy_document" "s3_read" {
     ]
 
     resources = [
-      "arn:aws:s3:${var.awsRegion}:${var.awsAccountId}:${var.bucket_name}",
-      "arn:aws:s3:${var.awsRegion}:${var.awsAccountId}:${var.bucket_name}/*"
+      "arn:aws:s3:::${var.bucket_name}",
+      "arn:aws:s3:::${var.bucket_name}/*"
     ]
   }
 }
