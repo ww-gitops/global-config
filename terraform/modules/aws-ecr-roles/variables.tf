@@ -3,6 +3,11 @@ variable "cluster_name" {
   description = "name of cluster to associate permissions with"
 }
 
+variable "repo_name" {
+  type        = string
+  description = "name of repo"
+}
+
 variable "awsAccountId" {
   type        = string
   description = "AWS account id"
@@ -31,7 +36,7 @@ variable "service_account" {
   default     = "source-controller"
 }
 
-variable "namespace" {
+variable "sa_namespace" {
   type        = string
   description = "namespace for kubernetes service account"
   default     = "flux-system"

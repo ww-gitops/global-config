@@ -7,7 +7,7 @@ data "aws_iam_policy_document" "ecr_read_assume_role" {
     condition {
       test     = "StringEquals"
       variable = "${replace(var.cluster_oidc_provider_url, "https://", "")}:sub"
-      values   = ["system:serviceaccount:${var.namespace}:${var.service_account}"]
+      values   = ["system:serviceaccount:${var.sa_namespace}:${var.service_account}"]
     }
 
     principals {
@@ -32,8 +32,7 @@ data "aws_iam_policy_document" "ecr_read" {
     ]
 
     resources = [
-      "arn:aws:ecr:${var.awsRegion}:${var.awsAccountId}:repository/cluster-${var.cluster_name}",
-      "arn:aws:ecr:${var.awsRegion}:${var.awsAccountId}:repository/templates"
+      "arn:aws:ecr:${var.awsRegion}:${var.awsAccountId}:repository/${var.repo_name}"
     ]
   }
 }
