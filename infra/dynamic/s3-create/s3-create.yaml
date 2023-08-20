@@ -25,20 +25,11 @@ spec:
       value: ${bucketName}
     - name: cluster_name
       value: ${clusterName}
-    - name: sa_namespace
-      value: ${templateNamespace}
-    - name: service_account
-      value: s3-image-versions
   varsFrom:
     - kind: ConfigMap
       name: cluster-config
       varsKeys:
         - region:awsRegion
-    - kind: Secret
-      name: ${clusterName}-cluster-config
-      varsKeys:
-        - cluster_oidc_provider_arn
-        - cluster_oidc_provider_url
   sourceRef:
     kind: GitRepository
     name: global-config

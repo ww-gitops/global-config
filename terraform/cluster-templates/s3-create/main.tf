@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.region
+  region = var.awsRegion
 
   default_tags {
     tags = merge({
@@ -52,13 +52,3 @@ resource "aws_s3_bucket_public_access_block" "s3_public_access" {
   restrict_public_buckets = true
 }
 
-module "aws_s3_roles" {
-  source                    = "../../modules/aws-s3-roles"
-  cluster_name              = var.cluster_name
-  cluster_oidc_provider_arn = var.cluster_oidc_provider_arn
-  cluster_oidc_provider_url = var.cluster_oidc_provider_url
-  awsRegion = var.region
-  awsAccountId = var.awsAccountId
-  service_account = var.service_account
-  namespace = var.sa_namespace
-}

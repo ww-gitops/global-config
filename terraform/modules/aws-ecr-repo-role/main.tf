@@ -32,8 +32,7 @@ data "aws_iam_policy_document" "ecr_read" {
     ]
 
     resources = [
-      "arn:aws:ecr:${var.awsRegion}:${var.awsAccountId}:repository/cluster-${var.cluster_name}",
-      "arn:aws:ecr:${var.awsRegion}:${var.awsAccountId}:repository/templates"
+      "arn:aws:ecr:${var.awsRegion}:${var.awsAccountId}:repository/${var.repo_name}",
     ]
   }
 }
