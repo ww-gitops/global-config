@@ -8,22 +8,48 @@ spec:
   ref:
     branch: main
   url: https://github.com/${GitHubOrg}/clusters.git
-# ---
-# apiVersion: kustomize.toolkit.fluxcd.io/v1
-# kind: Kustomization
-# metadata:
-#   name: ${resourceName}-cluster-image-versions
-#   namespace: ${templateNamespace}
-# spec:
-#   prune: true
-#   wait: true
-#   timeout: 5m
-#   interval: 5m
-#   sourceRef:
-#     kind: GitRepository
-#     name: ${resourceName}-cluster-apps
-#   path: ./
-#   postBuild:
-#     substituteFrom:
-#       - kind: ConfigMap
-#         name: cluster-config
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ${resourceName}-cluster-image-versions
+  namespace: ${templateNamespace}
+spec:
+  prune: true
+  wait: true
+  timeout: 5m
+  interval: 5m
+  sourceRef:
+    kind: GitRepository
+    name: clusters
+  path: ./cluster-yamls/s3-src
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: ${resourceName}-cluster-oci-src
+  namespace: ${templateNamespace}
+spec:
+  prune: true
+  wait: true
+  timeout: 5m
+  interval: 5m
+  dependsOn:
+    - name: ${resourceName}-cluster-image-versions
+  sourceRef:
+    kind: GitRepository
+    name: clusters
+  path: ./cluster-yamls/oci-src
+  postBuild:
+    substituteFrom:
+      - kind: ConfigMap
+        name: cluster-config
+      - kind: ConfigMap
+        name: templates-tag
+      - kind: ConfigMap
+        name: cluster-apps-tag
+
