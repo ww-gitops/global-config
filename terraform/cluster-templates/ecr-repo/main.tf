@@ -23,6 +23,6 @@ module "aws_ecr_roles" {
   cluster_oidc_provider_url = data.aws_iam_openid_connect_provider.this.url
   awsRegion = var.region
   awsAccountId = data.aws_caller_identity.current.account_id
-  namespace = var.template_namespace
+  sa_namespace = var.sa_namespace
   service_account = var.service_account
 }

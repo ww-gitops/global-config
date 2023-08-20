@@ -25,11 +25,21 @@ spec:
       value: ${ecrName}
     - name: cluster_name
       value: ${clusterName}
+    - name: sa_namespace
+      value: ${templateNamespace}
+    - name: service_account
+      value: ${ecrName}
   varsFrom:
     - kind: ConfigMap
       name: cluster-config
       varsKeys:
         - awsRegion
+        - awsAccountId
+    - kind: Secret
+      name: ${clusterName}-cluster-config
+      varsKeys:
+        - cluster_oidc_provider_arn
+        - cluster_oidc_provider_url
   sourceRef:
     kind: GitRepository
     name: global-config

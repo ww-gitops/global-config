@@ -35,7 +35,7 @@ variable "service_account" {
   description = "kubernetes service account"
 }
 
-variable "namespace" {
+variable "sa_namespace" {
   type        = string
   description = "namespace for kubernetes service account"
 }
