@@ -30,3 +30,24 @@ variable "awsRegion" {
   default     = ""
 }
 
+variable "service_account" {
+  type        = string
+  description = "serviceaccount name"
+  default     = ""
+}
+
+variable "sa_namespace" {
+  type        = string
+  description = "serviceaccount namespace"
+  default     = ""
+}
+
+variable "cluster_oidc_provider_arn" {
+  type        = string
+  description = " Cluster OIDC provider arn"
+}
+
+variable "cluster_oidc_provider_url" {
+  type        = string
+  description = " Cluster OIDC provider url"
+}

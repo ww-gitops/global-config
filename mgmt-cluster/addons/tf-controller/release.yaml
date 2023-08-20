@@ -25,11 +25,9 @@ spec:
   values:
     allowBreakTheGlass: true
     image:
-      # repository: pcarlton/tf-controller
       tag: "v0.16.0-rc.2"
     runner:
       image:
-        # repository: pcarlton/tf-runner
         tag: "v0.16.0-rc.2"
       # serviceAccount:
       #   annotations:
