@@ -62,13 +62,13 @@ variable "flux_sync_directory" {
 variable "desired_size" {
   type        = number
   description = "Desired number of instances in Node Group"
-  default     = 2
+  default     = 1
 }
 
 variable "max_size" {
   type        = number
   description = "Max number of instances in Node Group"
-  default     = 4
+  default     = 6
 }
 
 variable "min_size" {
@@ -92,7 +92,7 @@ variable "capacity_type" {
 variable "instance_type" {
   type        = string
   description = "Instance type associated with Node Group"
-  default     = "t3.large"
+  default     = "t3.medium"
 }
 
 variable "git_commit_author" {
