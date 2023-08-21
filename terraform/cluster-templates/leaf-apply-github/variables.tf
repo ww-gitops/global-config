@@ -122,3 +122,21 @@ variable "awsTagProjectGid" {
   default     = ""
 }
 
+variable "cset" {
+  type        = string
+  description = "cluster set"
+  default     = ""
+}
+
+variable "region" {
+  type        = string
+  description = "cluster region"
+  default     = ""
+}
+
+variable "env" {
+  type        = string
+  description = "cluster env, i.e. dev, staging or prod"
+  default     = ""
+}
+
