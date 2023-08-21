@@ -21,19 +21,57 @@ resource "aws_iam_role" "s3_read" {
   name               = "${var.cluster_name}-s3-image-version-read"
 }
 
-data "aws_iam_policy_document" "s3_read" {
+data "aws_iam_policy_document" "harbor" {
   statement {
     effect = "Allow"
 
     actions = [
+      "s3:PutObject",
+      "s3:ListMultipartUploadParts",
+      "s3:ListBucketMultipartUploads",
       "s3:ListBucket",
-      "s3:GetObject*"
+      "s3:GetObject",
+      "s3:GetBucketLocation",
+      "s3:DeleteObject",
+      "s3:AbortMultipartUpload"
     ]
 
     resources = [
-      "arn:aws:s3:::${var.bucket_name}",
-      "arn:aws:s3:::${var.bucket_name}/*"
+      aws_s3_bucket.harbor.arn,
+      "${aws_s3_bucket.harbor.arn}/*"
     ]
+  }
+
+  statement {
+    effect = "Allow"
+
+    actions = [
+      "kms:ListKeys",
+      "kms:ListAliases",
+      "kms:DescribeKey",
+      "kms:Decrypt",
+      "kms:Encrypt"
+    ]
+
+    resources = [
+      "*"
+    ]
+  }
+}
+
+data "aws_iam_policy_document" "s3_read" {
+  statement {
+      sid = ""
+      effect = "Allow"
+      actions = ["s3:GetObject"]
+      resources = ["arn:aws:s3:::${var.bucket_name}/*"]
+  }
+    
+  statement {
+    effect = "Allow"
+    sid = ""
+    actions = ["s3:ListBucket"]
+    resources = ["arn:aws:s3:::${var.bucket_name}"]
   }
 }
 
