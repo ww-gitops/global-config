@@ -22,8 +22,8 @@ data:
   resourceName: ${resourceName}
   templateNamespace: ${templateNamespace}
   clusterSet: ${cset}
-  region: ${geo}
-  env: ${clusterEnv}
+  region: ${region}
+  env: ${env}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -49,5 +49,6 @@ data:
   resourceName: ${resourceName}
   templateNamespace: flux-system
   clusterSet: ${cset}
-  region: ${geo}
-  env: ${clusterEnv}
+  region: ${region}
+  env: ${env}
+  
