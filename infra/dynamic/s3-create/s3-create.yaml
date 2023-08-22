@@ -1,7 +1,7 @@
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: 's3-${bucketName}-bootstrap'
+  name: 's3-${bucketName}'
   namespace: ${templateNamespace}
 spec:
   interval: 10m
@@ -10,7 +10,7 @@ spec:
   approvePlan: auto
   destroyResourcesOnDeletion: true
   writeOutputsToSecret:
-    name: '${bucketName}-bootstrap-bucket'
+    name: '${bucketName}-bucket'
   backendConfig:
     customConfiguration: |
       backend "s3" {
