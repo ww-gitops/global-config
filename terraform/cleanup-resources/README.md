@@ -26,7 +26,7 @@ The following is a generated overview of the terraform requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 4.33 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.13.1 |
 
 ## Providers
 
