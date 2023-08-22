@@ -1,16 +1,16 @@
 apiVersion: infra.contrib.fluxcd.io/v1alpha2
 kind: Terraform
 metadata:
-  name: ecr-${ecrName}
+  name: ecr-${ecrName}-role
   namespace: ${templateNamespace}
 spec:
   interval: 10m
   retryInterval: 20s
-  path: ./terraform/cluster-templates/ecr-repo
+  path: ./terraform/cluster-templates/ecr-role
   approvePlan: auto
   destroyResourcesOnDeletion: true
   writeOutputsToSecret:
-    name: '${ecrName}-ecr-config'
+    name: '${ecrName}-role-config'
   backendConfig:
     customConfiguration: |
       backend "s3" {

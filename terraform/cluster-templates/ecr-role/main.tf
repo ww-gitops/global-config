@@ -9,10 +9,22 @@ provider "aws" {
   }
 }
 
-resource "aws_ecr_repository" "repo" {
-  name                 = var.repo_name
-  force_delete         = true
-  image_tag_mutability = "IMMUTABLE"
+data "aws_eks_cluster" "this" {
+  name = var.cluster_name
+}
+
+data "aws_eks_cluster_auth" "this" {
+  name = var.cluster_name
+}
+
+data "aws_iam_openid_connect_provider" "this" {
+  url = data.aws_eks_cluster.this.identity[0].oidc[0].issuer
+}
+
+provider "kubernetes" {
+  host                   = data.aws_eks_cluster.this.endpoint
+  cluster_ca_certificate = base64decode(data.aws_eks_cluster.this.certificate_authority[0].data)
+  token                  = data.aws_eks_cluster_auth.this.token
 }
 
 module "aws_ecr_roles" {
@@ -26,4 +38,3 @@ module "aws_ecr_roles" {
   sa_namespace = var.sa_namespace
   service_account = var.service_account
 }
-

@@ -13,11 +13,6 @@ variable "tags" {
   }
 }
 
-variable "cluster_name" {
-  type        = string
-  description = "name of cluster to associate permissions with"
-}
-
 variable "awsAccountId" {
   type        = string
   description = "AWS account id"

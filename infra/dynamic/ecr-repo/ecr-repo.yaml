@@ -23,8 +23,6 @@ spec:
   vars:
     - name: repo_name
       value: ${ecrName}
-    - name: cluster_name
-      value: ${clusterName}
   sourceRef:
     kind: GitRepository
     name: global-config
