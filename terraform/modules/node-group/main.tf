@@ -46,12 +46,12 @@ resource "aws_launch_template" "this" {
 
   ebs_optimized = true
 
-  # metadata_options {
-  #   http_endpoint               = "enabled"
-  #   http_tokens                 = "required"
-  #   http_put_response_hop_limit = 1
-  #   instance_metadata_tags      = "enabled"
-  # }
+ metadata_options {
+    http_endpoint               = "enabled"
+    http_tokens                 = "required"
+    http_put_response_hop_limit = 2
+    instance_metadata_tags      = "enabled"
+  }
 
   tag_specifications {
     resource_type = "instance"
