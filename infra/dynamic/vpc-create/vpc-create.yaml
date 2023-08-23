@@ -4,7 +4,7 @@ metadata:
   name: 'vpc-${resourceName}-${vpcName}'
   namespace: ${templateNamespace}
 spec:
-  interval: 10m
+ interval: 1h
   retryInterval: 20s
   path: ./terraform/cluster-templates/vpc-create
   approvePlan: auto

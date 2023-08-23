@@ -4,7 +4,7 @@ metadata:
   name: '${resourceName}-eks-${clusterName}'
   namespace: ${templateNamespace}
 spec:
-  interval: 10m
+ interval: 1h
   retryInterval: 20s
   path: ./terraform/cluster-templates/eks-use
   approvePlan: auto
