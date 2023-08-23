@@ -4,7 +4,7 @@ metadata:
   name: ecr-${ecrName}
   namespace: ${templateNamespace}
 spec:
- interval: 1h
+  interval: 1h
   retryInterval: 20s
   path: ./terraform/cluster-templates/ecr-repo
   approvePlan: auto

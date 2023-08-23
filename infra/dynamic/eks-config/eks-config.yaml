@@ -4,7 +4,7 @@ metadata:
   name: 'eks-config-${resourceName}-${clusterName}'
   namespace: ${templateNamespace}
 spec:
- interval: 1h
+  interval: 1h
   dependsOn:
     - name: 'eks-${resourceName}-${clusterName}'
   retryInterval: 20s
