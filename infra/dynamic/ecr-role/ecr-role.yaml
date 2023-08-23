@@ -23,12 +23,14 @@ spec:
   vars:
     - name: repo_name
       value: ${ecrName}
+    - name: role_name
+      value: ${roleName}
     - name: cluster_name
       value: ${clusterName}
     - name: sa_namespace
       value: ${templateNamespace}
     - name: service_account
-      value: ${ecrName}
+      value: ${serviceAccount}
   varsFrom:
     - kind: ConfigMap
       name: cluster-config
