@@ -27,7 +27,7 @@ spec:
     - name: cluster_name
       value: ${clusterName}
     - name: region
-      value: ${awsRegion}    
+      value: ${awsRegion}
   sourceRef:
     kind: GitRepository
     name: global-config
