@@ -51,3 +51,8 @@ variable "cluster_oidc_provider_url" {
   type        = string
   description = " Cluster OIDC provider url"
 }
+
+variable "role_name" {
+  type        = string
+  description = "name of role"
+}
