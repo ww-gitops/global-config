@@ -18,7 +18,7 @@ data "aws_iam_policy_document" "s3_read_assume_role" {
 
 resource "aws_iam_role" "s3_read" {
   assume_role_policy = data.aws_iam_policy_document.s3_read_assume_role.json
-  name               = "${var.cluster_name}-s3-image-version-read"
+  name               = "${var.cluster_name}-s3-bootstrap-read"
 }
 
 data "aws_iam_policy_document" "s3_read" {
