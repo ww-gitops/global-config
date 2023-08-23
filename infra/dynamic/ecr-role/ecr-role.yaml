@@ -8,6 +8,7 @@ spec:
   retryInterval: 20s
   path: ./terraform/cluster-templates/ecr-role
   approvePlan: auto
+  storeReadablePlan: human
   destroyResourcesOnDeletion: true
   writeOutputsToSecret:
     name: '${ecrName}-role-config'

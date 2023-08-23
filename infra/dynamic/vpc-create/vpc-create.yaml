@@ -8,6 +8,7 @@ spec:
   retryInterval: 20s
   path: ./terraform/cluster-templates/vpc-create
   approvePlan: auto
+  storeReadablePlan: human
   destroyResourcesOnDeletion: true
   writeOutputsToSecret:
     name: '${resourceName}-${vpcName}-vpc-config'

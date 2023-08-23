@@ -10,6 +10,7 @@ spec:
   retryInterval: 20s
   path: ./terraform/cluster-templates/leaf-apply-${scmType}
   approvePlan: auto
+  storeReadablePlan: human
   destroyResourcesOnDeletion: true
   backendConfig:
     customConfiguration: |

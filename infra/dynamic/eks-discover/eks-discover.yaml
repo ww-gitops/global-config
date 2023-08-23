@@ -8,6 +8,7 @@ spec:
   retryInterval: 20s
   path: ./terraform/cluster-templates/eks-use
   approvePlan: auto
+  storeReadablePlan: human
   destroyResourcesOnDeletion: true
   writeOutputsToSecret:
     name: '${resourceName}-eks-${clusterName}-config'
