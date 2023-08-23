@@ -13,6 +13,7 @@ module "aws_ecr_roles" {
   source                    = "../../modules/aws-ecr-roles"
   cluster_name              = var.cluster_name
   repo_name                 = var.repo_name
+  role_name                 = var.role_name
   cluster_oidc_provider_arn = var.cluster_oidc_provider_arn
   cluster_oidc_provider_url = var.cluster_oidc_provider_url
   awsRegion = var.awsRegion

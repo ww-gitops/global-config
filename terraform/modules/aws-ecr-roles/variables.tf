@@ -42,3 +42,7 @@ variable "sa_namespace" {
   default     = "flux-system"
 }
 
+variable "role_name" {
+  type        = string
+  description = "name of role"
+}

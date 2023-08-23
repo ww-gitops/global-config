@@ -1,10 +1,3 @@
-resource "kubernetes_service_account_v1" "ecr" {
-  metadata {
-    name      = var.service_account
-    namespace = var.sa_namespace
-  }
-}
-
 data "aws_iam_policy_document" "ecr_read_assume_role" {
   statement {
     actions = ["sts:AssumeRoleWithWebIdentity"]
@@ -25,7 +18,7 @@ data "aws_iam_policy_document" "ecr_read_assume_role" {
 
 resource "aws_iam_role" "ecr_read" {
   assume_role_policy = data.aws_iam_policy_document.ecr_read_assume_role.json
-  name               = "${var.cluster_name}-ecr-read"
+  name               = "${var.role_name}"
 }
 
 data "aws_iam_policy_document" "ecr_read" {
