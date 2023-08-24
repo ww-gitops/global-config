@@ -100,4 +100,4 @@ spec:
         hostnames:
         - dex.${dnsSuffix}
         - wge.${dnsSuffix}
-        - vault.${dnsSuffix} 
+        - vault.${dnsSuffix}
