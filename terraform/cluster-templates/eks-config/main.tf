@@ -86,13 +86,13 @@ module "worker_node_group" {
   resource_tags             = var.tags
 }
 
-module "leaf_config" {
-  source                 = "../../modules/leaf-config"
-  cluster_name           = var.cluster_name
-  cluster_ca_certificate = data.aws_eks_cluster.this.certificate_authority[0].data
-  cluster_endpoint       = data.aws_eks_cluster.this.endpoint
-  template_namespace     = var.template_namespace
-}
+# module "leaf_config" {
+#   source                 = "../../modules/leaf-config"
+#   cluster_name           = var.cluster_name
+#   cluster_ca_certificate = data.aws_eks_cluster.this.certificate_authority[0].data
+#   cluster_endpoint       = data.aws_eks_cluster.this.endpoint
+#   template_namespace     = var.template_namespace
+# }
 
 module "aws_s3_roles" {
   source                    = "../../modules/aws-s3-roles"
