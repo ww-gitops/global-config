@@ -49,10 +49,10 @@ provider "github" {
   token = var.github_token
 }
 
-provider "vault" {
-  address = var.vault_url
-  token = var.vault_token
-}
+# provider "vault" {
+#   address = var.vault_url
+#   token = var.vault_token
+# }
 
 module "system_node_group" {
   source                    = "../../modules/node-group"
