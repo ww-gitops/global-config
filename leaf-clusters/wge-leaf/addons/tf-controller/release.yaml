@@ -25,10 +25,10 @@ spec:
   values:
     allowBreakTheGlass: true
     image:
-      tag: "v0.16.0-rc.2"
+      tag: "v0.16.0-rc.3"
     runner:
       image:
-        tag: "v0.16.0-rc.2"
+        tag: "v0.16.0-rc.3"
       # serviceAccount:
       #   annotations:
       #     eks.amazonaws.com/role-arn: ${tfRunnerRoleArn}
