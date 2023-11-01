@@ -10,8 +10,8 @@ spec:
   interval: 5m
   sourceRef:
     kind: GitRepository
-    name: clusters
-  path: ./cluster-yamls/s3-src
+    name: global-config
+  path: leaf-clusters/apps/oci-apps/oci-src/cluster-yamls/s3-src
   postBuild:
     substituteFrom:
       - kind: ConfigMap

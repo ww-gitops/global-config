@@ -6,7 +6,7 @@ metadata:
 spec:
   interval: 10m0s
   timeout: 2m
-  path: ./leaf-clusters/oci-src
+  path: ./leaf-clusters/apps/oci-apps/oci-src
   prune: true
   wait: true
   sourceRef:
