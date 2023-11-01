@@ -11,8 +11,8 @@ spec:
     - name: aws
   sourceRef:
     kind: GitRepository
-    name: clusters
-  path: ./onboarding
+    name: flux-system
+  path: ./oci-apps/onboarding
   prune: true
   wait: true
   timeout: 5m
