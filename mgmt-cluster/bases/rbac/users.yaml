@@ -4,7 +4,7 @@ metadata:
   name: all
 subjects:
   - kind: User
-    name: wge-admin
+    name: wego-admin
     apiGroup: rbac.authorization.k8s.io
   - kind: User
     name: ${userEmail}
