@@ -319,8 +319,6 @@ spec:
     kind: GitRepository
     name: global-config
   postBuild:
-    substitute:
-      suspendNamespaceGitopsSet: "${suspendNamespaceGitopsSet}"
     substituteFrom:
       - kind: ConfigMap
         name: cluster-config

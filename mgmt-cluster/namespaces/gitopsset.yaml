@@ -10,7 +10,6 @@ metadata:
   name: namespaces
   namespace: flux-system
 spec:
-  suspend: ${suspendNamespaceGitopsSet}
   serviceAccountName: gitopssets
   generators:
     - gitRepository:
