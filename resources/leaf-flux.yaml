@@ -24,7 +24,7 @@ spec:
   dependsOn:
     - name: wge-sa
   interval: 10m0s
-  path: ./clusters/kind/$hostname-$cluster_name/wge
+  path: ./clusters/$type/$hostname-$cluster_name/wge
   prune: true
   wait: true
   sourceRef:
