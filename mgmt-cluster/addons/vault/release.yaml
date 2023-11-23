@@ -84,3 +84,11 @@ spec:
                 mountPath: /etc/ssl/certs/local-ca.pem
                 subPath: CA.cer
                 readOnly: false
+
+        - target:
+            kind: Ingress
+            name: vault
+            patch: |-
+              - op: add
+                path: /spec/ingressClassName
+                value: nginx
