@@ -3,6 +3,12 @@ variable "bucket_name" {
   description = "S3 Bucket name"
 }
 
+variable "bucket_id" {
+  type        = string
+  description = "S3 Bucket id, use if exists already"
+  default = "none"
+}
+
 variable "tags" {
   type        = map(string)
   description = "resource specific tags"
