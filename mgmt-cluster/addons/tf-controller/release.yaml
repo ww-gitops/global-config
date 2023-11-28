@@ -28,7 +28,7 @@ spec:
       tag: "v0.16.0-rc.2"
     runner:
       image:
-        tag: "v0.16.0-rc.2"
+        tag: "v0.16.0-rc.3-base-tf-1.5.7-mpl"
       # serviceAccount:
       #   annotations:
       #     eks.amazonaws.com/role-arn: ${tfRunnerRoleArn}
@@ -37,3 +37,7 @@ spec:
     certRotationCheckFrequency: 3m0s
     certValidityDuration: 5m
     caCertValidityDuration: 10m
+    awsPackage:
+      install: true
+      tag: v4.38.0-4b864f2
+      repository: ghcr.io/tf-controller/aws-primitive-modules
