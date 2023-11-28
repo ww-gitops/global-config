@@ -29,6 +29,7 @@ spec:
     runner:
       image:
         tag: "v0.16.0-rc.3-base-tf-1.5.7-mpl"
+        repository: ghcr.io/tf-controller/tf-runner
       # serviceAccount:
       #   annotations:
       #     eks.amazonaws.com/role-arn: ${tfRunnerRoleArn}
