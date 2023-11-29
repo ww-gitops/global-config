@@ -18,6 +18,7 @@ spec:
   chart:
     spec:
       chart: mccp
+      version: v0.30.0
       sourceRef:
         kind: HelmRepository
         name: weave-gitops-enterprise-charts
@@ -36,14 +37,14 @@ spec:
       enabled: true
 
     # Uses the query service for Applications and Sources views
-    useQueryServiceBackend: false
-    # explorer:
-    #   collector:
-    #     # ServiceAccount that explorer will use to watch clusters for resources
-    #     serviceAccount:
-    #       name: "collector"
-    #       namespace: "flux-system"
-    # enableExplorer: true
+    useQueryServiceBackend: true
+    explorer:
+      collector:
+        # ServiceAccount that explorer will use to watch clusters for resources
+        serviceAccount:
+          name: "collector"
+          namespace: "flux-system"
+    enableExplorer: true
 
     ingress:
       enabled: true
