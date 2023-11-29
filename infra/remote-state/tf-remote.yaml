@@ -40,3 +40,7 @@ spec:
       envFrom:
       - secretRef:
           name: aws-creds
+      env:
+      - name: TF_LOG
+        value: JSON
+  
