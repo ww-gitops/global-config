@@ -28,8 +28,8 @@ spec:
       tag: "v0.16.0-rc.2"
     runner:
       image:
-        tag: v0.16.0-rc.3-base-tofu-1.6.0-alpha5 # "v0.16.0-rc.3-base-tf-1.5.7-mpl"
-        repository: ghcr.io/paulcarlton-ww/tofu-runner # ghcr.io/tf-controller/tf-runner
+        tag: v0.16.0-rc.3-base-tf-1.6.0-beta2-bsl
+        repository: ghcr.io/tf-controller/tf-runner 
       # serviceAccount:
       #   annotations:
       #     eks.amazonaws.com/role-arn: ${tfRunnerRoleArn}
