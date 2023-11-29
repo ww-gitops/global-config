@@ -19,7 +19,6 @@ import {
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket_name
   force_destroy = true
-  region = var.awsRegion
 }
 
 resource "aws_s3_bucket_versioning" "s3_versioning" {
