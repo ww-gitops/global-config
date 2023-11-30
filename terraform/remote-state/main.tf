@@ -40,6 +40,15 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "s3_encrypt" {
 resource "aws_s3_bucket_acl" "private_bucket" {
   bucket = aws_s3_bucket.terraform_state.id
   acl    = "private"
+  depends_on = [aws_s3_bucket_ownership_controls.s3_bucket_acl_ownership]
+}
+
+# Resource to avoid error "AccessControlListNotSupported: The bucket does not allow ACLs"
+resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
+  bucket = aws_s3_bucket.bucket-one-two.id
+  rule {
+    object_ownership = "ObjectWriter"
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "s3_public_access" {
