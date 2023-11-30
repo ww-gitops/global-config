@@ -28,6 +28,6 @@ variable "awsAccountId" {
 variable "awsRegion" {
   type        = string
   description = "AWS region"
-  default     = ""
+  default     = "eu-west-1"
 }
 
