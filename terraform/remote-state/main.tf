@@ -45,7 +45,7 @@ resource "aws_s3_bucket_acl" "private_bucket" {
 
 # Resource to avoid error "AccessControlListNotSupported: The bucket does not allow ACLs"
 resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
-  bucket = aws_s3_bucket.bucket-one-two.id
+  bucket = aws_s3_bucket.terraform_state.id
   rule {
     object_ownership = "ObjectWriter"
   }
