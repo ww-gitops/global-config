@@ -16,8 +16,8 @@ spec:
   writeOutputsToSecret:
     name: aws-s3-bucket-outputs
     outputs:
-    - arn
-    - bucket
+    - dynamo_table_id
+    - bucket_id
   vars:
     - name: bucket_name
       value: ${prefixName}-${awsAccountId}-${awsRegion}-tf-state
