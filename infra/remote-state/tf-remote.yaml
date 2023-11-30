@@ -13,6 +13,7 @@ spec:
   retryInterval: 1m
   interval: 1h
   destroyResourcesOnDeletion: true
+  storeReadablePlan: human
   writeOutputsToSecret:
     name: aws-s3-bucket-outputs
     outputs:
