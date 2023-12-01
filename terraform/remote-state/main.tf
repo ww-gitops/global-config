@@ -1,5 +1,5 @@
 provider "aws" {
-  region = var.awsRegion
+  region = "us-east-1" # Temporary fix for issue with location constraints
 
   default_tags {
     tags = merge({
@@ -18,7 +18,6 @@ import {
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket_name
-  region = var.awsRegion
   force_destroy = true
 }
 
