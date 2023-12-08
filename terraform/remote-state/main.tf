@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "us-east-1" # Temporary fix for issue with location constraints
+  region = var.awsRegion
 
   default_tags {
     tags = merge({
