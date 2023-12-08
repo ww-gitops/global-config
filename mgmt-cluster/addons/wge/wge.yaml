@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: mccp
-      version: v0.30.0
+      version: v0.38.0
       sourceRef:
         kind: HelmRepository
         name: weave-gitops-enterprise-charts
@@ -44,7 +44,14 @@ spec:
         serviceAccount:
           name: "collector"
           namespace: "flux-system"
-    enableExplorer: true
+
+      enabled: true # global enable/disable flag
+      # ...
+      enabledFor: # list of components that can be enabled or disabled
+        - applications
+        - sources
+        - gitopssets
+        - templates
 
     ingress:
       enabled: true
@@ -98,11 +105,13 @@ spec:
     #   enabled: false
     global:
       capiEnabled: ${capi}
-    #### Metrics - Prometheus metrics configuration
-    metrics:
-      # Enables metrics generation and prometheus endpoint
-      enabled: false
+
+    monitoring:
+      enabled: true # enable it if you want to expose a monitoring server
+      metrics:
+        enabled: true # enable it to expose a prometheus metrics endpoint in `/metrics`
       service:
+        name: monitoring
         # -- Port to start the metrics exporter on
         port: 8080
         # -- Annotations to set on the service
@@ -110,6 +119,8 @@ spec:
           prometheus.io/scrape: "false"
           prometheus.io/path: "/metrics"
           prometheus.io/port: "8080"
+      profiling:
+        enabled: true # enable it to expose a pprof debug endpoint  `/debug/pprof`
 
     gitopssets-controller:
       enabled: true
