@@ -11,10 +11,10 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
-# import {
-#   to = aws_s3_bucket.terraform_state
-#   id = var.bucket_id
-# }
+import {
+  to = aws_s3_bucket.terraform_state
+  id = var.bucket_id
+}
 
 resource "aws_s3_bucket" "terraform_state" {
   bucket = var.bucket_name
