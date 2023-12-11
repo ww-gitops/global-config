@@ -3,15 +3,6 @@ kind: Namespace
 metadata:
   name: capa-system
 ---
-apiVersion: v1
-kind: Secret
-metadata:
-  name: aws-variables
-  namespace: capa-system
-type: Opaque
-stringData:
-  AWS_B64ENCODED_CREDENTIALS: ""
----
 apiVersion: operator.cluster.x-k8s.io/v1alpha1
 kind: InfrastructureProvider
 metadata:
