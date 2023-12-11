@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: capa-system
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: aws-variables
+  namespace: capa-system
+type: Opaque
+stringData:
+  AWS_B64ENCODED_CREDENTIALS: ""
+---
+apiVersion: operator.cluster.x-k8s.io/v1alpha1
+kind: InfrastructureProvider
+metadata:
+  name: aws
+  namespace: capa-system
+spec:
+  secretName: aws-variables
+  version: v2.0.3
+  deployment:
+    containers:
+    - args:
+        --feature-gates: MachinePool=true,ClusterResourceSet=true,ClusterTopology=true
+      name: manager

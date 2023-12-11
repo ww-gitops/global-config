@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: capi-operator-system
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: capi-operator
+  namespace: capi-operator-system
+spec:
+  provider: generic
+  interval: 10m0s
+  url: https://kubernetes-sigs.github.io/cluster-api-operator
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: capi-operator
+  namespace: capi-operator-system
+spec:
+  dependsOn:
+    - name: cert-manager
+      namespace: flux-system
+  chart:
+    spec:
+      chart: cluster-api-operator
+      # version: 0.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: capi-operator
+        namespace: capi-operator-system
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  interval: 5m0s
