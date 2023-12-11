@@ -131,11 +131,11 @@ spec:
           # - --health-probe-bind-address=:8081
           # - --metrics-bind-address=127.0.0.1:8080
           # - --leader-elect
-          - --enabled-generators=GitRepository,Cluster,List,APIClient,Matrix
-        manager:
-          image:
-            repository: bigkevmcd/gitopssets-controller
-            tag: 178bc77
+          - --enabled-generators=ociRepository,GitRepository,Cluster,List,APIClient,Matrix,config,APIClient,pullRequest,list,imagepolicy
+        # manager:
+        #   image:
+        #     repository: bigkevmcd/gitopssets-controller
+        #     tag: 178bc77
   postRenderers:
     - kustomize:
         patches:

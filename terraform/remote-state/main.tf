@@ -11,6 +11,10 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
+# Commented out due to https://github.com/hashicorp/terraform-provider-aws/issues/23221#issuecomment-1425789967
+# This works if the bucket does not exist because the resource creation below creates the bucket in the provider's region
+# but if the bucket already exists, even in the same region, the import gets a region mismatch error because it thinks it is in us-east-1
+
 # import {
 #   to = aws_s3_bucket.terraform_state
 #   id = var.bucket_id
