@@ -14,5 +14,5 @@ spec:
   deployment:
     containers:
     - args:
-        --feature-gates: MachinePool=true,ClusterResourceSet=true,ClusterTopology=true
+        --feature-gates: MachinePool=true,ClusterResourceSet=true,ClusterTopology=true,AWSClusterControllerIdentity=true
       name: manager
