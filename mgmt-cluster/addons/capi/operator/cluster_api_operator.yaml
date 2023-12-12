@@ -20,9 +20,6 @@ metadata:
   name: capi-operator
   namespace: capi-operator-system
 spec:
-  dependsOn:
-    - name: cert-manager
-      namespace: flux-system
   chart:
     spec:
       chart: cluster-api-operator

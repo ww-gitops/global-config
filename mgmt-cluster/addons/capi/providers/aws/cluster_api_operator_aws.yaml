@@ -9,7 +9,7 @@ metadata:
   name: aws
   namespace: capa-system
 spec:
-  secretName: aws-variables
+  secretName: capi-aws-default
   version: v2.0.3
   deployment:
     containers:
