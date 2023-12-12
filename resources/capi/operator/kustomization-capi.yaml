@@ -25,7 +25,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./mgmt-cluster/addons/capi/provider/core
+  path: ./mgmt-cluster/addons/capi/providers/core
   prune: true
   wait: true
   dependsOn:
