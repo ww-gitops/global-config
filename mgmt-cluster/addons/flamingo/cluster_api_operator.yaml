@@ -1,0 +1,74 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: flamingo
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: flamingo
+  namespace: flamingo
+spec:
+  provider: generic
+  interval: 10m0s
+  url: https://argoproj.github.io/argo-helm
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: flamingo
+  namespace: flamingo
+spec:
+  chart:
+    spec:
+      chart: argo-cd
+      # version: 0.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: flamingo
+        namespace: flamingo
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
+  interval: 5m0s
+  values:
+    global:
+      image:
+        # -- If defined, a repository applied to all Argo CD deployments
+        repository: ghcr.io/flux-subsystem-argo/fsa/argocd
+        # -- Overrides the global Argo CD image tag whose default is the chart appVersion
+        tag: "v2.9.1-fl.21-main-794f2ef5quay.io/argoproj/argocd"
+        # -- If defined, a imagePullPolicy applied to all Argo CD deployments
+        imagePullPolicy: IfNotPresent
+
+  postRenderers:
+    - kustomize:
+        patches:
+        - target:
+            kind: Deployment
+            name: argocd
+          patch: |-
+            - op: add
+              path: /spec/template/spec/hostAliases
+              value:
+                - ip: ${clusterIP}
+                  hostnames:
+                  - "dex.${dnsSuffix}"
+                  - "flamingo.${dnsSuffix}"
+
+            - op: add
+              path: /spec/template/spec/volumes/-
+              value:
+                name: local-ca
+                configMap:
+                  name: local-ca
+
+            - op: add
+              path: /spec/template/spec/containers/0/volumeMounts/-
+              value:
+                name: local-ca
+                mountPath: /etc/ssl/certs/local-ca.pem
+                subPath: CA.cer
+                readOnly: false
