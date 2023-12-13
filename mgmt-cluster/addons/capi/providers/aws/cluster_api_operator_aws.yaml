@@ -9,10 +9,10 @@ metadata:
   name: aws
   namespace: capa-system
 spec:
-  secretName: capi-aws-default
+  secretName: capa-manager-bootstrap-credentials
   version: v2.0.3
   deployment:
     containers:
     - args:
-        --feature-gates: MachinePool=true,ClusterResourceSet=true,ClusterTopology=true,AutoControllerIdentityCreator=true
+        --feature-gates: MachinePool=true,ClusterResourceSet=true,ClusterTopology=true
       name: manager
