@@ -1,15 +1,3 @@
----
-apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-kind: AWSClusterStaticIdentity
-metadata:
-  name: capi-aws-creds
-  namespace: default
-spec:
-  allowedNamespaces:
-    list:
-    - default
-  secretRef: capi-aws-creds
----
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
@@ -27,7 +15,16 @@ spec:
     - extract:
         key: aws-creds
 ---
-
+apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
+kind: AWSClusterStaticIdentity
+metadata:
+  name: capi-aws-creds
+spec:
+  allowedNamespaces:
+    list:
+    - default
+  secretRef: capi-aws-creds
+---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
@@ -50,7 +47,7 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: capi-aws-creds
-  namespace: default
+  namespace: capa-system
 spec:
   refreshInterval: 5m
   secretStoreRef:
